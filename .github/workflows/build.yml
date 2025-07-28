@@ -36,8 +36,8 @@ jobs:
 
           bash build-docs-project.sh
 
-          npm install --prefix docs
-          npm run --prefix docs build
+          npm install
+          npm run build
 
           cd build
           tar -czf ../anemos-docs.tar.gz .
