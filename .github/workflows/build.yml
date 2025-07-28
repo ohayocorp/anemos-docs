@@ -1,15 +1,6 @@
 name: build
 on:
-  workflow_call:
-    inputs:
-      create_artifacts:
-        required: false
-        type: boolean
-        default: false
   push:
-    branches:
-      - "master"
-  pull_request:
     branches:
       - "master"
 
@@ -39,12 +30,12 @@ jobs:
           npm install
           npm run build
 
-          cd build
-          tar -czf ../anemos-docs.tar.gz .
+          npm install
 
-      - name: Upload artifacts
-        if: ${{ inputs.create_artifacts }}
-        uses: actions/upload-artifact@v4
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
         with:
-          name: anemos-docs
-          path: anemos-docs.tar.gz
+          apiToken: ${{ secrets.CLOUDFLARE_PAGES_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_PAGES_ACCOUNT_ID }}
+          command: pages deploy build --project-name=anemos-docs
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
