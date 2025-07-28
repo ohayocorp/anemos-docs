@@ -4,128 +4,130 @@ import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-    title: 'Anemos',
-    tagline: 'Kubernetes package manager',
-    favicon: 'img/favicon.ico',
+  title: 'Anemos',
+  tagline: 'Kubernetes package manager',
+  favicon: 'img/favicon.ico',
 
-    url: 'https://anemos.sh',
-    baseUrl: '/',
+  url: 'https://anemos.sh',
+  baseUrl: '/',
 
-    onBrokenLinks: 'throw',
-    onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
 
-    i18n: {
-        defaultLocale: 'en',
-        locales: ['en'],
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en'],
+  },
+
+  markdown: {
+    preprocessor: ({ filePath, fileContent }) => {
+      return fileContent.replaceAll('{{CODE_PATH}}', path.resolve(__dirname, path.join('.', 'docs-code')).replaceAll(/\\/g, '/'));
     },
+    mermaid: true,
+  },
 
-    markdown: {
-        preprocessor: ({ filePath, fileContent }) => {
-            return fileContent.replaceAll('{{CODE_PATH}}', path.resolve(__dirname, path.join('.', 'docs-code')).replaceAll(/\\/g, '/'));
+  trailingSlash: true,
+
+  presets: [
+    [
+      'classic',
+      {
+        docs: {
+          sidebarPath: './sidebars.ts',
         },
-        mermaid: true,
-    },
+        blog: {
+          showReadingTime: true,
+          feedOptions: {
+            type: ['rss', 'atom'],
+            xslt: true,
+          },
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          editUrl:
+            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          // Useful options to enforce blogging best practices
+          onInlineTags: 'warn',
+          onInlineAuthors: 'warn',
+          onUntruncatedBlogPosts: 'warn',
+        },
+        theme: {
+          customCss: './src/css/custom.css',
+        },
+      } satisfies Preset.Options,
+    ],
+  ],
 
-    presets: [
-        [
-            'classic',
+  themes: [
+    '@docusaurus/theme-mermaid',
+  ],
+
+  themeConfig: {
+    image: 'img/anemos-social-card.jpg',
+    navbar: {
+      title: 'Anemos',
+      logo: {
+        alt: 'Anemos Logo',
+        src: 'img/logo.png',
+      },
+      items: [
+        {
+          type: 'docSidebar',
+          sidebarId: 'docsSidebar',
+          position: 'left',
+          label: 'Docs',
+        },
+        {
+          href: 'https://github.com/ohayocorp/anemos',
+          label: 'GitHub',
+          position: 'right',
+        },
+      ],
+    },
+    footer: {
+      style: 'dark',
+      links: [
+        {
+          title: 'Community',
+          items: [
             {
-                docs: {
-                    sidebarPath: './sidebars.ts',
-                },
-                blog: {
-                    showReadingTime: true,
-                    feedOptions: {
-                        type: ['rss', 'atom'],
-                        xslt: true,
-                    },
-                    // Please change this to your repo.
-                    // Remove this to remove the "edit this page" links.
-                    editUrl:
-                        'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-                    // Useful options to enforce blogging best practices
-                    onInlineTags: 'warn',
-                    onInlineAuthors: 'warn',
-                    onUntruncatedBlogPosts: 'warn',
-                },
-                theme: {
-                    customCss: './src/css/custom.css',
-                },
-            } satisfies Preset.Options,
-        ],
-    ],
-
-    themes: [
-        '@docusaurus/theme-mermaid',
-    ],
-
-    themeConfig: {
-        image: 'img/anemos-social-card.jpg',
-        navbar: {
-            title: 'Anemos',
-            logo: {
-                alt: 'Anemos Logo',
-                src: 'img/logo.png',
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/anemos',
             },
-            items: [
-                {
-                    type: 'docSidebar',
-                    sidebarId: 'docsSidebar',
-                    position: 'left',
-                    label: 'Docs',
-                },
-                {
-                    href: 'https://github.com/ohayocorp/anemos',
-                    label: 'GitHub',
-                    position: 'right',
-                },
-            ],
+            {
+              label: 'GitHub',
+              href: 'https://github.com/ohayocorp/anemos',
+            },
+          ],
         },
-        footer: {
-            style: 'dark',
-            links: [
-                {
-                    title: 'Community',
-                    items: [
-                        {
-                            label: 'Stack Overflow',
-                            href: 'https://stackoverflow.com/questions/tagged/anemos',
-                        },
-                        {
-                            label: 'GitHub',
-                            href: 'https://github.com/ohayocorp/anemos',
-                        },
-                    ],
-                },
-                {
-                    title: 'Social',
-                    items: [
-                        {
-                            label: 'X',
-                            href: 'https://x.com/ohayocorp',
-                        },
-                        {
-                            label: 'LinkedIn',
-                            href: 'https://www.linkedin.com/company/ohayocorp/',
-                        },
-                    ],
-                },
-            ],
-            copyright: `Copyright © ${new Date().getFullYear()} Ohayocorp, Inc. Built with Docusaurus.`,
+        {
+          title: 'Social',
+          items: [
+            {
+              label: 'X',
+              href: 'https://x.com/ohayocorp',
+            },
+            {
+              label: 'LinkedIn',
+              href: 'https://www.linkedin.com/company/ohayocorp/',
+            },
+          ],
         },
-        prism: {
-            theme: prismThemes.oneLight,
-            darkTheme: prismThemes.oneDark,
-            additionalLanguages: ["diff", "bash", "powershell"],
-        },
-        algolia: {
-            appId: '72G6IVIRR8',
-            apiKey: '09b05eef254dc39321153599ad7e15d8',
-            indexName: 'Anemos Docs',
-            contextualSearch: true,
-            insights: true,
-        },
-    } satisfies Preset.ThemeConfig,
+      ],
+      copyright: `Copyright © ${new Date().getFullYear()} Ohayocorp, Inc. Built with Docusaurus.`,
+    },
+    prism: {
+      theme: prismThemes.oneLight,
+      darkTheme: prismThemes.oneDark,
+      additionalLanguages: ["diff", "bash", "powershell"],
+    },
+    algolia: {
+      appId: '72G6IVIRR8',
+      apiKey: '09b05eef254dc39321153599ad7e15d8',
+      indexName: 'Anemos Docs',
+      contextualSearch: true,
+      insights: true,
+    },
+  } satisfies Preset.ThemeConfig,
 };
 
 export default config;

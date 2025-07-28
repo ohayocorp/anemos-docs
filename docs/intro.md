@@ -24,5 +24,5 @@ It lets you:
 - Define and manage service requirements and dependencies effectively.
 - Modify Kubernetes manifests individually or in bulk after they are generated.
 
-[Install](installation) the Anemos CLI to get started and follow the
-[tutorial](category/tutorial) to explore its core concepts and features.
+[Install](/docs/installation) the Anemos CLI to get started and follow the
+[tutorial](/docs/category/tutorial) to explore its core concepts and features.
