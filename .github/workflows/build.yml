@@ -1,0 +1,49 @@
+name: build
+on:
+  workflow_call:
+      create_artifacts:
+        required: false
+        type: boolean
+        default: false
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "master"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+
+      - name: Build
+        run: |
+          curl -L -o anemos.tar.gz https://github.com/ohayocorp/anemos/releases/latest/download/anemos-linux-amd64.tar.gz && \
+          tar -xzf anemos.tar.gz && \
+          rm anemos.tar.gz && \
+          chmod +x anemos && \
+          sudo mv anemos /usr/local/bin/
+
+          bash build-docs-project.sh
+
+          npm install --prefix docs
+          npm run --prefix docs build
+
+          cd build
+          tar -czf ../anemos-docs.tar.gz .
+
+      - name: Upload artifacts
+        if: ${{ inputs.create_artifacts }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: anemos-docs
+          path: anemos-docs.tar.gz
