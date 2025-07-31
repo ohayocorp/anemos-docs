@@ -6,10 +6,6 @@
   ],
   "devDependencies": {
     "@ohayocorp/anemos": "workspace:.anemos/types",
-    "typescript": "^5.8.3",
-    "copyfiles": "^2.4.1"
-  },
-  "scripts": {
-    "copy-assets": "copyfiles *.tgz dist"
+    "typescript": "^5.8.3"
   }
 }

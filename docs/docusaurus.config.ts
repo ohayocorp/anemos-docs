@@ -19,6 +19,11 @@ const config: Config = {
     locales: ['en'],
   },
 
+  future: {
+    v4: true,
+    experimental_faster: true,
+  },
+
   markdown: {
     preprocessor: ({ filePath, fileContent }) => {
       return fileContent.replaceAll('{{CODE_PATH}}', path.resolve(__dirname, path.join('..', 'docs-code')).replaceAll(/\\/g, '/'));
@@ -126,6 +131,30 @@ const config: Config = {
       contextualSearch: true,
       insights: true,
     },
+    headTags: [
+      {
+        tagName: 'link',
+        attributes: {
+          rel: 'preconnect',
+          href: 'https://fonts.googleapis.com',
+        },
+      },
+      {
+        tagName: 'link',
+        attributes: {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossorigin: 'anonymous',
+        },
+      },
+      {
+        tagName: 'link',
+        attributes: {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap',
+        },
+      },
+    ],
   } satisfies Preset.ThemeConfig,
 };
 
