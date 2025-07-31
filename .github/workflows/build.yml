@@ -36,5 +36,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_PAGES_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_PAGES_ACCOUNT_ID }}
-          command: pages deploy build --project-name=anemos-docs
+          command: pages deploy docs/build --project-name=anemos-docs
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
