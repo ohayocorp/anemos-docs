@@ -21,7 +21,7 @@ const config: Config = {
 
   markdown: {
     preprocessor: ({ filePath, fileContent }) => {
-      return fileContent.replaceAll('{{CODE_PATH}}', path.resolve(__dirname, path.join('.', 'docs-code')).replaceAll(/\\/g, '/'));
+      return fileContent.replaceAll('{{CODE_PATH}}', path.resolve(__dirname, path.join('..', 'docs-code')).replaceAll(/\\/g, '/'));
     },
     mermaid: true,
   },

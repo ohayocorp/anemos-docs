@@ -27,10 +27,9 @@ jobs:
 
           bash build-docs-project.sh
 
+          cd docs
           npm install
           npm run build
-
-          npm install
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3

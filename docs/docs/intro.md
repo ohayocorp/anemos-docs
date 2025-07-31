@@ -25,4 +25,4 @@ It lets you:
 - Modify Kubernetes manifests individually or in bulk after they are generated.
 
 [Install](/docs/installation) the Anemos CLI to get started and follow the
-[tutorial](/docs/category/tutorial) to explore its core concepts and features.
+[tutorial](/docs/category/simple-tutorial) to explore its core concepts and features.
