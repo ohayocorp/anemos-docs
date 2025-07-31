@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: anemos-hello-world
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: anemos-hello-world
+  template:
+    metadata:
+      labels:
+        app: anemos-hello-world
+    spec:
+      containers:
+        - name: "echo"
+          image: "hashicorp/http-echo:1.0"
+          args:
+            - "-text=Hello, Anemos!"
+          ports:
+            - name: "http"
+              containerPort: 5678
+              protocol: "TCP"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5678
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5678

@@ -2,10 +2,12 @@ const anemos = require("@ohayocorp/anemos");
 const thisScriptDirectory = anemos.file.currentScriptDirectory();
 
 function runCase(path) {
-    // Set the base output path to the test case directory so that
-    // the output files are created in the correct place.
-    process.env.ANEMOS_OUTPUT_PATH=`${thisScriptDirectory}/${path}/output`;
-    require(`./${path}`);
+  console.log(`Running test case: ${path}\n`);
+
+  // Set the base output path to the test case directory so that
+  // the output files are created in the correct place.
+  process.env.ANEMOS_OUTPUT_PATH = `${thisScriptDirectory}/${path}/output`;
+  require(`./${path}`);
 }
 
 runCase("yaml-manipulation/basics/create-yaml-nodes");
@@ -14,6 +16,9 @@ runCase("yaml-manipulation/basics/modify-document");
 
 runCase("execution-order");
 runCase("helm-interop");
+
+runCase("simple-tutorial/generate-manifests");
+runCase("simple-tutorial/generate-manifests/on-modify");
 
 runCase("tutorial/generating-kubernetes-manifests");
 runCase("tutorial/components-and-actions");

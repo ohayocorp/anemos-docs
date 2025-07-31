@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: anemos-hello-world
+  namespace: default
+  labels:
+    label-for-all-documents: example
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: "http"
+      protocol: TCP

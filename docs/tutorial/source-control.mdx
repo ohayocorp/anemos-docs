@@ -111,7 +111,7 @@ affects the generated Kubernetes manifests:
     ```diff title="index.ts"
     @@ -3,7 +3,7 @@ import * as anemos from "@ohayocorp/anemos";
      const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
-    
+
     -const name = "example-app";
     +const name = "example-app2";
      const namespace = "default";
@@ -124,7 +124,7 @@ affects the generated Kubernetes manifests:
     ```diff title="index.js"
     @@ -3,7 +3,7 @@ const anemos = require("@ohayocorp/anemos");
      const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
-    
+
     -const name = "example-app";
     +const name = "example-app2";
      const namespace = "default";

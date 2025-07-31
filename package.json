@@ -24,12 +24,16 @@
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.8.1",
-    "@docusaurus/tsconfig": "3.8.1",
-    "@docusaurus/types": "3.8.1",
+    "@docusaurus/module-type-aliases": "^3.8.1",
+    "@docusaurus/tsconfig": "^3.8.1",
+    "@docusaurus/types": "^3.8.1",
+    "@tailwindcss/postcss": "^4.1.11",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.11",
     "typescript": "~5.8.3"
   },
   "browserslist": {

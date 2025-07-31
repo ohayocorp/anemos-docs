@@ -91,13 +91,6 @@ unrelated to Kubernetes manifests. For example, you can use the `@grafana/grafan
 using staticly typed objects and embed them into your manifests. This allows you to leverage the power of the JavaScript ecosystem
 and use existing libraries to enhance your Anemos projects.
 
-## Applying Manifests
-
-Helm has a built-in command to apply manifests to the cluster. This command makes it easy to quickly deploy
-your manifests to a cluster. Anemos, currently, does not have a built-in command to apply manifests. This
-may change in the future, but for now, you can use other CLI tools such as `kubectl` or `kapp`, or GitOps tools like
-ArgoCD or Flux to apply your manifests to the cluster.
-
 ## Interoperability with Helm Charts
 
 Anemos supports generating documents from Helm charts, allowing you to use your existing Helm charts
