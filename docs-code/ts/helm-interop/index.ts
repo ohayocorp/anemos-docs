@@ -2,6 +2,7 @@ import * as anemos from "@ohayocorp/anemos";
 
 const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
 
+// You can also use a local file path instead of a URL such as: ./path/to/helloworld-0.2.1.tgz
 builder.addHelmChart(
   "https://github.com/crowdsecurity/helm-charts/releases/download/helloworld-0.2.1/helloworld-0.2.1.tgz",
   "hello-world",
