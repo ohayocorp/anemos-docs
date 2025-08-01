@@ -4,5 +4,6 @@
   "compilerOptions": {
     "baseUrl": "."
   },
+  "include": [".anemos/**/*.ts"],
   "exclude": [".docusaurus", "build"]
 }

@@ -1,5 +1,7 @@
 $thisScriptDirectory=$PSScriptRoot
 
+anemos.exe declarations docs\.anemos
+
 Push-Location "${thisScriptDirectory}\docs-code\js"
 
 try {
@@ -24,7 +26,7 @@ try {
     # For each tsconfig.json file, run the anemos build command
     foreach ($tsconfigFile in $tsconfigFiles) {
         $tsconfigPath = $tsconfigFile.FullName
-        
+
         Push-Location $tsconfigFile.DirectoryName
 
         try {

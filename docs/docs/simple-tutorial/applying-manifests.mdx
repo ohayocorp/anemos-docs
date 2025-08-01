@@ -41,7 +41,7 @@ If the value of the `-f` flag is `-`, Anemos will read the options from the stan
 Here is an example of how to apply a package:
 
 <CodeBlock language="bash">
-  anemos apply {useBaseUrl('/examples/hello-world.js', {absolute: true})} -f - &lt;&lt;EOF
+  anemos apply --yes {useBaseUrl('/examples/hello-world.js', {absolute: true})} -f - &lt;&lt;EOF
   replicaCount: 3
   EOF
   <ApplyOutput />

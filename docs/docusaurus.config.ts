@@ -59,6 +59,29 @@ const config: Config = {
 
   plugins: [
     ['./src/plugins/tailwind-config.js', {}],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        entryPoints: ['.anemos/index.d.ts'],
+        sidebar: {
+          pretty: true,
+        },
+        router: "kind",
+        useCodeBlocks: true,
+        classPropertiesFormat: 'table',
+        interfacePropertiesFormat: 'table',
+        parametersFormat: 'table',
+        typeAliasPropertiesFormat: 'table',
+        enumMembersFormat: 'table',
+        propertyMembersFormat: 'table',
+        typeDeclarationFormat: 'table',
+        pageTitleTemplates: {
+          "index": 'API Documentation',
+          "member": '{kind}: {name}',
+          "module": "{name}"
+        }
+      },
+    ],
   ],
 
   themes: [

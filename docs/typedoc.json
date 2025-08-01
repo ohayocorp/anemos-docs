@@ -1,0 +1,4 @@
+{
+  "plugin": ["typedoc-plugin-markdown", "typedoc-docusaurus-theme"],
+  "entryPoints": [".anemos/index.d.ts"]
+}

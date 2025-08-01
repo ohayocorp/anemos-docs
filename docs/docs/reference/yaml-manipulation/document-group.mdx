@@ -1,0 +1,83 @@
+---
+sidebar_position: 4
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+import ModifyDocumentJs from '!!raw-loader!{{CODE_PATH}}/js/yaml-manipulation/basics/modify-document/index.js';
+import ModifyDocumentTs from '!!raw-loader!{{CODE_PATH}}/ts/yaml-manipulation/basics/modify-document/index.ts';
+import ModifiedYaml from '!!raw-loader!{{CODE_PATH}}/js/yaml-manipulation/basics/modify-document/output/manifests/modified.yaml';
+
+# Document Group
+
+Documents in Anemos belong to a document group, which is a collection of documents that are managed together.
+
+## Path of a Document Group
+
+Document groups have a path that is used to identify them. This path is used to create a directory where the
+documents are stored. Paths are also used as the apply set identifier when applying the documents to a Kubernetes cluster.
+
+When documents are added to a `Builder` or a `BuilderContext`, they are automatically assigned to a document group
+with an empty path.
+
+```javascript
+builder.addDocument(
+  `pod.yaml`,
+  `
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: my-pod
+  spec:
+    containers:
+    - name: my-container
+      image: nginx
+  `
+);
+```
+
+It is possible to set the path of the document group explicitly by passing it as the first argument to the `addDocument` method.
+In this case, if a document group with the same path already exists, the document will be added to that group. Otherwise, a new
+document group will be created.
+
+```javascript
+builder.addDocument(
+  `my-document-group`,
+  `pod.yaml`,
+  `
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: my-pod
+  spec:
+    containers:
+    - name: my-container
+      image: nginx
+  `);
+```
+
+## Creating and Getting Document Groups
+
+You can create a document group using its constructor, which takes a path as an argument.
+
+```javascript
+const documentGroup = new DocumentGroup(`my-document-group`);
+```
+
+You can get the document groups from a `BuilderContext` using the `getDocumentGroups` or `getDocumentGroup` methods.
+This is particularly useful when you want to modify all document groups or a specific one during the `modify` step.
+
+It is also possible to add a document group to a `BuilderContext` or remove it using the `addDocumentGroup` and
+`removeDocumentGroup` methods.
+
+```javascript
+builder.onModify((context) => {
+    for (const documentGroup of context.getDocumentGroups()) {
+        // ...
+    }
+
+    const documentGroup = context.getDocumentGroup("my-document-group");
+});
+```
