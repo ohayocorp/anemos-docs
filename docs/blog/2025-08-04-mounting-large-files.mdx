@@ -1,0 +1,244 @@
+---
+title: Mounting Large Files to Containers Efficiently
+description: Learn how to efficiently mount large files into your Kubernetes containers.
+slug: mounting-large-files
+authors: notanaverageman
+tags: [kubernetes, volumes, llm, anemos]
+hide_table_of_contents: false
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import { ExpandableCodeBlock, CodeBlockExpander, ExpandableCodeBlockProvider } from '@site/src/components/ui/expandableCodeBlock';
+import CodeBlock from '@theme/CodeBlock';
+import HelmJs from '!!raw-loader!@site/static/blog/2025-08-04-mounting-large-files/helm.js';
+import MountSidecarDataJs from '!!raw-loader!@site/static/blog/2025-08-04-mounting-large-files/mountSidecarData.js';
+import HelmDeploymentYaml from '!!raw-loader!@site/static/blog/2025-08-04-mounting-large-files/helm-deployment.yaml';
+import ExampleLog from '!!raw-loader!@site/static/blog/2025-08-04-mounting-large-files/example.log';
+
+Large model files—such as those used for machine learning or AI inference—can be hundreds of megabytes or even several gigabytes in size, which has a direct impact on pod startup times.
+
+When these files need to be copied into a container or volume at startup, it can significantly delay pod readiness and consume considerable network bandwidth, especially if multiple pods start at once.
+
+This blog post explores how to efficiently mount large files into your Kubernetes containers. We’ll look at the new beta `ImageVolume` feature in Kubernetes, which allows you to mount files directly from OCI images, and how to achieve similar results using existing features in Kubernetes.
+
+{/* truncate */}
+
+## ImageVolume Feature in Kubernetes
+
+With Kubernetes 1.33, mounting OCI images directly into containers has reached beta, and it’s expected to become stable in 1.35. This feature allows you to mount large files straight into your containers, eliminating the need to copy them into the container image.
+
+Let’s look at how simple it will be to use this feature once it’s stable:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: llama-cpp
+spec:
+  containers:
+    - name: app
+      image: ghcr.io/ggml-org/llama.cpp:server-b6081
+      command:
+        - /app/llama-server
+        - -m
+        - /mnt/models/granite-3.0-1b-a400m-instruct-Q4_K_M.gguf
+      volumeMounts:
+        - name: data-volume
+          mountPath: /mnt
+  volumes:
+    - name: data-volume
+      image:
+        # An OCI image that contains a GUFF file of a large model.
+        reference: redhat/granite-3-1b-a400m-instruct:1.0
+        pullPolicy: IfNotPresent
+```
+
+If you apply this manifest to your cluster _(with the `ImageVolume` feature gate enabled)_, it will create a pod that mounts the filesystem of the `redhat/granite-3-1b-a400m-instruct:1.0` image to the `/mnt` directory in the container. You can then access the files in that directory as if they were part of the container’s own filesystem.
+
+Using port forwarding, you can access the web server running in the container at `http://localhost:8080` and interact with the model.
+
+```bash
+$ kubectl port-forward llama-cpp 8080
+```
+
+![llama-cpp web ui](@site/static/blog/2025-08-04-mounting-large-files/screenshot.png)
+
+The `granite-3.0-1b-a400m-instruct-Q4_K_M.gguf` file (784MB) is mounted into the container without any copying and can be used by llama.cpp. That’s pretty good!
+
+## Achieving Similar Results Without ImageVolume
+
+ImageVolume feature is great, however, it won’t be released as stable for a few more months, and even after its release, many Kubernetes clusters won’t be updated right away. So, is there a way to use this capability today? The answer is yes—there is!
+
+Before we dive into the solution, let’s quickly review the alternatives for mounting large files in Kubernetes and why they might not be suitable:
+
+- **ConfigMap or Secret:** You can mount files this way, but they have strict size limits and aren’t suitable for large files.
+- **PersistentVolume:** This works, but requires extra setup and isn’t easy to share between pods. Creating a PersistentVolume for each pod is impractical, and you’ll need an external process to populate the data.
+- **Download at Startup:** You could download the file from a remote URL before starting the container, but this increases pod startup time, lacks easy caching, and requires network access, which isn’t always available.
+
+That leaves us with using a temporary volume that can hold large files—an `emptyDir`. But how do we populate an `emptyDir` with large files before the main container starts? The most straightforward way is to use an init container that copies the file into the `emptyDir` before the main container runs. Here’s an example manifest:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: llama-cpp
+spec:
+  initContainers:
+    - name: data
+      image: redhat/granite-3-1b-a400m-instruct:1.0
+      command:
+        - cp
+        - /models/granite-3.0-1b-a400m-instruct-Q4_K_M.gguf
+        - /mnt/models/
+      volumeMounts:
+        - name: data
+          mountPath: /mnt/models
+  containers:
+    - name: app
+      image: ghcr.io/ggml-org/llama.cpp:server-b6081
+      command:
+        - /app/llama-server
+        - -m
+        - /mnt/models/granite-3.0-1b-a400m-instruct-Q4_K_M.gguf
+      volumeMounts:
+        - name: data
+          mountPath: /mnt/models
+  volumes:
+    - name: data
+      emptyDir: {}
+```
+
+This manifest creates a pod with an init container that copies the `granite-3.0-1b-a400m-instruct-Q4_K_M.gguf` file from the `redhat/granite-3-1b-a400m-instruct:1.0` image to the `/mnt/models` directory in the `emptyDir` volume. The main container then mounts the same volume and can access the file.
+
+However, copying this 784MB file into the `emptyDir` takes about 6 seconds on my machine with an NVMe SSD—which isn’t ideal. If the file is larger or the disk is slower, this time will increase, negatively affecting pod startup. It would be much better if we could mount the file directly from the image without copying.
+
+## Mounting Large Files Directly
+
+To mount large files directly from an image, we need a few extra steps:
+
+1. **Access the artifact image’s filesystem from the main container.** We can do this using Kubernetes’ `shareProcessNamespace` feature.
+1. **Mark the data container so the script can identify it.** An environment variable works well for this.
+1. **Ensure the data container is running before the main container starts.** This can be done in two ways: by using the sidecar container pattern for clusters with Kubernetes version 1.33+, or by defining the data container before the main container in the pod spec and adding a `postStart` hook, which is compatible with older Kubernetes versions.
+1. **Run a script in the main container to find the data container’s PID and the path to its filesystem.** It's then possible to create a symbolic link to the large file in the main container’s filesystem and run the application using that link. This requires shell access in the main container.
+
+An alternative would be running the shell script to link the file in the data container. This might be useful if the main container doesn't have a shell or if you want to keep the main container's command clean. However, this approach requires the main container to wait for the file to be linked before it can start the application and may not be suitable for all applications.
+
+Here’s a manifest that puts it all together:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: llama-cpp
+spec:
+  shareProcessNamespace: true
+  containers:
+    - name: data
+      image: redhat/granite-3-1b-a400m-instruct:1.0
+      command:
+        - sleep
+        - infinity
+      env:
+        - name: IS_DATA_CONTAINER
+          value: "true"
+      lifecycle:
+        postStart:
+          exec:
+            command:
+              # Just a dummy command to ensure the data container is ready before the main container starts.
+              - echo
+    - name: app
+      image: ghcr.io/ggml-org/llama.cpp:server-b6081
+      command:
+        - /app/llama-server
+        - -m
+        - /mnt/models/granite-3.0-1b-a400m-instruct-Q4_K_M.gguf
+      securityContext:
+        capabilities:
+          add:
+            - "SYS_PTRACE"
+      command:
+        - bash
+        - -c
+        - |
+          dataContainerPid=$(grep -a -l IS_DATA_CONTAINER=true /proc/*/environ 2>/dev/null | awk -F/ '{print $3}')
+
+          echo "Data Container PID: ${dataContainerPid}"
+
+          source="/proc/${dataContainerPid}/root/models/granite-3.0-1b-a400m-instruct-Q4_K_M.gguf"
+          target="/mnt/models/granite-3.0-1b-a400m-instruct-Q4_K_M.gguf"
+
+          mkdir -p $(dirname "${target}")
+          ln -s "${source}" "${target}"
+
+          echo "Linked ${source} to ${target}"
+
+          # Run the actual application
+          /app/llama-server -m /mnt/models/granite-3.0-1b-a400m-instruct-Q4_K_M.gguf
+```
+
+### shareProcessNamespace
+
+Setting `shareProcessNamespace: true` allows containers in the pod to see each other’s processes and filesystems. This is important for the main container to access the data container’s filesystem. It also lets us search the `/proc` filesystem for the environment variable we set in the data container.
+
+### Data Container
+
+The `data-container` holds the model file we want to mount. Its command is set to `sleep infinity` to keep it running indefinitely. We set an environment variable `IS_DATA_CONTAINER=true` so it can be easily identified. The `postStart` hook ensures that Kubernetes waits for the data container to be ready before starting the main container.
+
+### No EmptyDir Volume Needed
+
+Notice that we’re not using an `emptyDir` volume here. Since we can access the data container’s filesystem directly, there’s no need to share a volume.
+
+### Main Container
+
+The main container is granted the `SYS_PTRACE` capability, which allows it to read the `/proc` filesystem of the data container. Without this, it might get permission denied errors, even if both containers run as the same user.
+
+The main container runs a shell script that:
+
+1. Finds the PID of the data container by searching for processes with the `IS_DATA_CONTAINER=true` environment variable in `/proc`.
+1. Constructs the source path to the model file in the data container's filesystem, which is accessible under `/proc/<pid>/root/`.
+1. Creates the target directory in its own filesystem and creates a symbolic link to the model file from the data container's filesystem.
+1. Runs the actual application—in this example, the llama.cpp server—using the mounted file.
+
+## Conclusion
+
+It takes a bit more work to set up, but this approach allows you to mount large files directly from an image without copying them to the container, significantly reducing pod startup time and network usage.
+
+When you combine this with pre-caching the image on your nodes, you can achieve nearly instant pod startup times, even for large files.
+
+## Bonus: Add Mounting Logic to Any Helm Chart
+
+[Anemos](https://anemos.sh) allows you to write reusable scripts that can modify Kubernetes manifests. It also allows you to use Helm charts to generate manifests. This means you can easily add the mounting logic we just discussed to manifests generated by any Helm chart.
+
+Here is a simple script that modifies the manifests generated by a Helm chart to add the mounting logic:
+
+<ExpandableCodeBlockProvider forceShowExpander={true}>
+  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+    <CodeBlockExpander />
+  </div>
+  <Tabs>
+    <TabItem value="index.js">
+      <ExpandableCodeBlock language="javascript" showLineNumbers={true}>
+        {HelmJs.replaceAll('http://localhost:3000/', useBaseUrl('/', {absolute: true}))}
+      </ExpandableCodeBlock>
+    </TabItem>
+    <TabItem value="deployment.yaml">
+      <ExpandableCodeBlock language="yaml" showLineNumbers={true}>
+        {HelmDeploymentYaml}
+      </ExpandableCodeBlock>
+    </TabItem>
+    <TabItem value="Example logs">
+      <ExpandableCodeBlock language="javascript" showLineNumbers={true}>
+        {ExampleLog}
+      </ExpandableCodeBlock>
+    </TabItem>
+    <TabItem value="mountSidecarData.js">
+      <ExpandableCodeBlock language="javascript" showLineNumbers={true}>
+        {MountSidecarDataJs}
+      </ExpandableCodeBlock>
+    </TabItem>
+  </Tabs>
+</ExpandableCodeBlockProvider>

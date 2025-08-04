@@ -53,6 +53,10 @@ const config: Config = {
         theme: {
           customCss: './src/css/custom.css',
         },
+        gtag: {
+          trackingID: 'G-KP9V30YGXQ',
+          anonymizeIP: false,
+        },
       } satisfies Preset.Options,
     ],
   ],
@@ -102,6 +106,11 @@ const config: Config = {
           sidebarId: 'docsSidebar',
           position: 'left',
           label: 'Docs',
+        },
+        {
+          to: 'blog',
+          label: 'Blog',
+          position: 'left'
         },
         {
           href: 'https://github.com/ohayocorp/anemos',
