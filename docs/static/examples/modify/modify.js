@@ -5,7 +5,7 @@ const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikub
 
 helloWorld.add(builder);
 
-builder.onStep(anemos.steps.modify, (context) => {
+builder.onModify(context => {
   context
     .getDocument("anemos-hello-world/deployment.yaml")
     .setLabel("deployment-specific-label", "example-deployment");
