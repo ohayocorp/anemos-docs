@@ -1,5 +1,5 @@
 const anemos = require("@ohayocorp/anemos");
-const mountSidecarData = require("http://localhost:3000/blog/2025-08-04-mounting-big-files/mountSidecarData.js");
+const mountSidecarData = require("http://localhost:3000/blog/2025-08-04-mounting-large-files/mountSidecarData.js");
 
 const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
 
