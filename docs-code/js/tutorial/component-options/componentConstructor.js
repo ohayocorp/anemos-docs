@@ -1,70 +1,72 @@
 const anemos = require("@ohayocorp/anemos");
 
 class Component extends anemos.Component {
+  // highlight-next-line
+  constructor(options) {
+    super();
+
     // highlight-next-line
-    constructor(options) {
-        super();
+    this.options = options ?? {};
 
-        // highlight-next-line
-        this.options = options ?? {};
-        
-        this.addAction(anemos.steps.generateResources, this.generateResources);
-    }
+    this.addAction(anemos.steps.generateResources, this.generateResources);
+  }
 
-    generateResources = (context) => {
-        const name = "example-app";
-        const namespace = "default";
-        const image = "nginx";
-        const replicas = 1;
+  generateResources = (context) => {
+    const name = "example-app";
+    const namespace = "default";
+    const image = "nginx";
+    const replicas = 1;
 
-        context.addDocument(
-            `deployment.yaml`,
-            `
-            apiVersion: apps/v1
-            kind: Deployment
+    context.addDocument({
+      path: `deployment.yaml`,
+      content: `
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: ${name}
+          namespace: ${namespace}
+        spec:
+          replicas: ${replicas}
+          selector:
+            matchLabels:
+              app: ${name}
+          template:
             metadata:
-              name: ${name}
-              namespace: ${namespace}
+              labels:
+                app: ${name}
             spec:
-              replicas: ${replicas}
-              selector:
-                matchLabels:
-                  app: ${name}
-              template:
-                metadata:
-                  labels:
-                    app: ${name}
-                spec:
-                  containers:
-                    - name: app
-                      image: ${image}
-                      ports:
-                        - containerPort: 80
-            `);
+              containers:
+                - name: app
+                  image: ${image}
+                  ports:
+                    - containerPort: 80
+        `
+    });
 
-        context.addDocument(
-            "service.yaml",
+    context.addDocument({
+      path: "service.yaml",
+      content: {
+        apiVersion: "v1",
+        kind: "Service",
+        metadata: {
+          name: name,
+          namespace: namespace,
+        },
+        spec: {
+          selector: {
+            app: name
+          },
+          ports: [
             {
-                apiVersion: "v1",
-                kind: "Service",
-                metadata: {
-                    name: name,
-                    namespace: namespace,
-                },
-                spec: {
-                    selector: {
-                        app: name
-                    },
-                    ports: [
-                        {
-                            protocol: "TCP",
-                            port: 80,
-                            targetPort: 80
-                        }
-                    ]
-                }
-            });
-    };
+              protocol: "TCP",
+              port: 80,
+              targetPort: 80
+            }
+          ]
+        }
+      }
+    });
+  };
 }
 
 module.exports = Component;

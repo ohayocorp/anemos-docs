@@ -1,7 +1,7 @@
 const anemos = require("@ohayocorp/anemos");
 const app = require("../../lib");
 
-const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
+const builder = new anemos.Builder();
 
 app.add(builder, {
     name: "test-example-package",

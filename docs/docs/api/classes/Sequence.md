@@ -210,7 +210,7 @@ Appends the given values to the sequence as [Scalar](Scalar.md)s.
 clear(): void;
 ```
 
-Defined in: sequence.d.ts:89
+Defined in: sequence.d.ts:92
 
 Removes all elements.
 
@@ -226,13 +226,35 @@ Removes all elements.
 clone(): Sequence;
 ```
 
-Defined in: sequence.d.ts:92
+Defined in: sequence.d.ts:95
 
 Returns a deep clone of the sequence.
 
 #### Returns
 
 `Sequence`
+
+***
+
+### contains()
+
+```ts
+contains(value): boolean;
+```
+
+Defined in: sequence.d.ts:89
+
+Returns true if the sequence contains a [Scalar](Scalar.md) with the given value.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `value` | `string` |
+
+#### Returns
+
+`boolean`
 
 ***
 

@@ -1,6 +1,6 @@
 # Class: Version
 
-Defined in: builderOptions.d.ts:70
+Defined in: builderOptions.d.ts:72
 
 Represents a single semantic version.
 
@@ -12,7 +12,7 @@ Represents a single semantic version.
 new Version(version): Version;
 ```
 
-Defined in: builderOptions.d.ts:71
+Defined in: builderOptions.d.ts:73
 
 #### Parameters
 

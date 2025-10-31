@@ -10,15 +10,12 @@ function runCase(path) {
   require(`./${path}`);
 }
 
-runCase("yaml-manipulation/basics/create-yaml-nodes");
-runCase("yaml-manipulation/basics/create-document");
-runCase("yaml-manipulation/basics/modify-document");
-
 runCase("execution-order");
 runCase("helm-interop");
 
 runCase("simple-tutorial/generate-manifests");
 runCase("simple-tutorial/generate-manifests/on-modify");
+runCase("simple-tutorial/generate-manifests/helm-chart");
 
 runCase("tutorial/generating-kubernetes-manifests");
 runCase("tutorial/components-and-actions");

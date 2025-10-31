@@ -1,6 +1,6 @@
 # Class: KubernetesCluster
 
-Defined in: builderOptions.d.ts:37
+Defined in: builderOptions.d.ts:38
 
 Contains information about the target Kubernetes cluster.
 
@@ -15,7 +15,7 @@ new KubernetesCluster(
    additionalResources?): KubernetesCluster;
 ```
 
-Defined in: builderOptions.d.ts:38
+Defined in: builderOptions.d.ts:39
 
 #### Parameters
 
@@ -33,6 +33,6 @@ Defined in: builderOptions.d.ts:38
 
 | Property | Type | Defined in |
 | ------ | ------ | ------ |
-| <a id="additionalresources"></a> `additionalResources?` | [`KubernetesResource`](KubernetesResource.md)[] | builderOptions.d.ts:42 |
-| <a id="distribution"></a> `distribution` | [`KubernetesDistribution`](../enums/KubernetesDistribution.md) | builderOptions.d.ts:40 |
-| <a id="version"></a> `version` | [`Version`](Version.md) | builderOptions.d.ts:41 |
+| <a id="additionalresources"></a> `additionalResources?` | [`KubernetesResource`](KubernetesResource.md)[] | builderOptions.d.ts:43 |
+| <a id="distribution"></a> `distribution` | [`KubernetesDistribution`](../enums/KubernetesDistribution.md) | builderOptions.d.ts:41 |
+| <a id="version"></a> `version` | [`Version`](Version.md) | builderOptions.d.ts:42 |

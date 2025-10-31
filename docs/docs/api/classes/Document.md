@@ -102,7 +102,7 @@ Returns a deep clone of the document.
 ensureAnnotations(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:11
+Defined in: documentExtensions.d.ts:14
 
 Ensures a [Mapping](Mapping.md) for ".metadata.annotations".
 
@@ -118,7 +118,7 @@ Ensures a [Mapping](Mapping.md) for ".metadata.annotations".
 ensureContainers(): Sequence;
 ```
 
-Defined in: documentExtensions.d.ts:23
+Defined in: documentExtensions.d.ts:26
 
 Ensures a [Sequence](Sequence.md) for ".spec.containers" if the document specifies a Pod or ".spec.template.spec.containers" if the document
 specifies another type of workload.
@@ -135,7 +135,7 @@ specifies another type of workload.
 ensureInitContainers(): Sequence;
 ```
 
-Defined in: documentExtensions.d.ts:29
+Defined in: documentExtensions.d.ts:32
 
 Ensures a [Sequence](Sequence.md) for ".spec.initContainers" if the document specifies a Pod or ".spec.template.spec.initContainers" if the document
 specifies another type of workload.
@@ -152,7 +152,7 @@ specifies another type of workload.
 ensureLabels(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:8
+Defined in: documentExtensions.d.ts:11
 
 Ensures a [Mapping](Mapping.md) for ".metadata.labels".
 
@@ -168,7 +168,7 @@ Ensures a [Mapping](Mapping.md) for ".metadata.labels".
 ensureMetadata(): Mapping;
 ```
 
-Defined in: document.d.ts:36
+Defined in: documentExtensions.d.ts:8
 
 Ensures a [Mapping](Mapping.md) for ".metadata".
 
@@ -184,7 +184,7 @@ Ensures a [Mapping](Mapping.md) for ".metadata".
 ensureVolumes(): Sequence;
 ```
 
-Defined in: documentExtensions.d.ts:35
+Defined in: documentExtensions.d.ts:38
 
 Ensures a [Sequence](Sequence.md) for ".spec.volumes" if the document specifies a Pod or ".spec.template.spec.volumes" if the document
 specifies another type of workload.
@@ -201,7 +201,7 @@ specifies another type of workload.
 ensureWorkloadAnnotations(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:53
+Defined in: documentExtensions.d.ts:56
 
 Ensures a [Mapping](Mapping.md) for ".metadata.annotations" if the document specifies a Pod or ".spec.template.metadata.annotations" if the document
 specifies another type of workload.
@@ -218,7 +218,7 @@ specifies another type of workload.
 ensureWorkloadLabels(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:47
+Defined in: documentExtensions.d.ts:50
 
 Ensures a [Mapping](Mapping.md) for ".metadata.labels" if the document specifies a Pod or ".spec.template.metadata.labels" if the document
 specifies another type of workload.
@@ -235,7 +235,7 @@ specifies another type of workload.
 ensureWorkloadMetadata(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:41
+Defined in: documentExtensions.d.ts:44
 
 Ensures a [Mapping](Mapping.md) for ".metadata" if the document specifies a Pod or ".spec.template.metadata" if the document
 specifies another type of workload.
@@ -252,7 +252,7 @@ specifies another type of workload.
 ensureWorkloadSpec(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:17
+Defined in: documentExtensions.d.ts:20
 
 Ensures a [Mapping](Mapping.md) for ".spec" if the document specifies a Pod or ".spec.template.spec" if the document
 specifies another type of workload.
@@ -285,7 +285,7 @@ Returns the file path to write the document into. Adds group name as base direct
 getAnnotation(annotation): string;
 ```
 
-Defined in: documentExtensions.d.ts:77
+Defined in: documentExtensions.d.ts:80
 
 Returns the value of ".metadata.annotations.$annotation". Returns null if the value is not found.
 
@@ -307,7 +307,7 @@ Returns the value of ".metadata.annotations.$annotation". Returns null if the va
 getAnnotations(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:80
+Defined in: documentExtensions.d.ts:83
 
 Returns the [Mapping](Mapping.md) for ".metadata.annotations". Returns null if the [Mapping](Mapping.md) is not found.
 
@@ -323,7 +323,7 @@ Returns the [Mapping](Mapping.md) for ".metadata.annotations". Returns null if t
 getApiVersion(): string;
 ```
 
-Defined in: documentExtensions.d.ts:56
+Defined in: documentExtensions.d.ts:59
 
 Returns the value of ".apiVersion". Returns null if the value is not found.
 
@@ -341,7 +341,7 @@ Returns the value of ".apiVersion". Returns null if the value is not found.
 getContainer(index): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:95
+Defined in: documentExtensions.d.ts:98
 
 Returns the ContainerMapping for ".spec.containers[i]" if the document specifies a Pod or ".spec.template.spec.containers[i]" if the document
 specifies another type of workload. Returns null if the [Mapping](Mapping.md) is not found.
@@ -362,7 +362,7 @@ specifies another type of workload. Returns null if the [Mapping](Mapping.md) is
 getContainer(name): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:101
+Defined in: documentExtensions.d.ts:104
 
 Returns the first [Mapping](Mapping.md) under ".spec.containers" if the document specifies a Pod or ".spec.template.spec.containers" if the document
 specifies another type of workload that the name equals to the given parameter. Returns null if the [Mapping](Mapping.md) is not found.
@@ -383,7 +383,7 @@ specifies another type of workload that the name equals to the given parameter. 
 getContainer(filter): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:107
+Defined in: documentExtensions.d.ts:110
 
 Returns the first [Mapping](Mapping.md) under ".spec.containers" if the document specifies a Pod or ".spec.template.spec.containers" if the document
 specifies another type of workload that the filter function returns true for. Returns null if the [Mapping](Mapping.md) is not found.
@@ -406,7 +406,7 @@ specifies another type of workload that the filter function returns true for. Re
 getContainers(): Sequence;
 ```
 
-Defined in: documentExtensions.d.ts:113
+Defined in: documentExtensions.d.ts:116
 
 Returns the [Sequence](Sequence.md) for ".spec.containers" if the document specifies a Pod or ".spec.template.spec.containers" if the document
 specifies another type of workload. Returns null if the [Sequence](Sequence.md) is not found.
@@ -425,7 +425,7 @@ specifies another type of workload. Returns null if the [Sequence](Sequence.md) 
 getInitContainer(index): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:119
+Defined in: documentExtensions.d.ts:122
 
 Returns the ContainerMapping for ".spec.initContainers[i]" if the document specifies a Pod or ".spec.template.spec.initContainers[i]" if the document
 specifies another type of workload. Returns null if the [Mapping](Mapping.md) is not found.
@@ -446,7 +446,7 @@ specifies another type of workload. Returns null if the [Mapping](Mapping.md) is
 getInitContainer(name): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:125
+Defined in: documentExtensions.d.ts:128
 
 Returns the first [Mapping](Mapping.md) under ".spec.initContainers" if the document specifies a Pod or ".spec.template.spec.initContainers" if the document
 specifies another type of workload that the name equals to the given parameter. Returns null if the [Mapping](Mapping.md) is not found.
@@ -467,7 +467,7 @@ specifies another type of workload that the name equals to the given parameter. 
 getInitContainer(filter): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:131
+Defined in: documentExtensions.d.ts:134
 
 Returns the first [Mapping](Mapping.md) under ".spec.initContainers" if the document specifies a Pod or ".spec.template.spec.initContainers" if the document
 specifies another type of workload that the filter function returns true for. Returns null if the [Mapping](Mapping.md) is not found.
@@ -490,7 +490,7 @@ specifies another type of workload that the filter function returns true for. Re
 getInitContainers(): Sequence;
 ```
 
-Defined in: documentExtensions.d.ts:137
+Defined in: documentExtensions.d.ts:140
 
 Returns the [Sequence](Sequence.md) for ".spec.initContainers" if the document specifies a Pod or ".spec.template.spec.initContainers" if the document
 specifies another type of workload. Returns null if the [Sequence](Sequence.md) is not found.
@@ -507,7 +507,7 @@ specifies another type of workload. Returns null if the [Sequence](Sequence.md) 
 getKind(): string;
 ```
 
-Defined in: documentExtensions.d.ts:59
+Defined in: documentExtensions.d.ts:62
 
 Returns value of ".kind". Returns null if the value is not found.
 
@@ -523,7 +523,7 @@ Returns value of ".kind". Returns null if the value is not found.
 getLabel(label): string;
 ```
 
-Defined in: documentExtensions.d.ts:71
+Defined in: documentExtensions.d.ts:74
 
 Returns the value of ".metadata.labels.$label". Returns null if the value is not found.
 
@@ -545,7 +545,7 @@ Returns the value of ".metadata.labels.$label". Returns null if the value is not
 getLabels(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:74
+Defined in: documentExtensions.d.ts:77
 
 Returns the [Mapping](Mapping.md) for ".metadata.labels". Returns null if the [Mapping](Mapping.md) is not found.
 
@@ -561,7 +561,7 @@ Returns the [Mapping](Mapping.md) for ".metadata.labels". Returns null if the [M
 getMetadata(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:62
+Defined in: documentExtensions.d.ts:65
 
 Returns the [Mapping](Mapping.md) for ".metadata". Returns null if the [Mapping](Mapping.md) is not found.
 
@@ -577,7 +577,7 @@ Returns the [Mapping](Mapping.md) for ".metadata". Returns null if the [Mapping]
 getName(): string;
 ```
 
-Defined in: documentExtensions.d.ts:65
+Defined in: documentExtensions.d.ts:68
 
 Returns value of ".metadata.name". Returns null if the value is not found.
 
@@ -593,7 +593,7 @@ Returns value of ".metadata.name". Returns null if the value is not found.
 getNamespace(): string;
 ```
 
-Defined in: documentExtensions.d.ts:68
+Defined in: documentExtensions.d.ts:71
 
 Returns value of ".metadata.namespace". Returns null if the value is not found.
 
@@ -625,7 +625,7 @@ Return the root of the document as a [Mapping](Mapping.md).
 getSpec(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:83
+Defined in: documentExtensions.d.ts:86
 
 Returns the [Mapping](Mapping.md) for ".spec". Returns null if the value is not found.
 
@@ -643,7 +643,7 @@ Returns the [Mapping](Mapping.md) for ".spec". Returns null if the value is not 
 getVolume(index): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:143
+Defined in: documentExtensions.d.ts:146
 
 Returns the [Mapping](Mapping.md) for ".spec.volumes[i]" if the document specifies a Pod or ".spec.template.spec.volumes[i]"
 if the document specifies another type of workload. Returns null if the [Mapping](Mapping.md) is not found.
@@ -664,7 +664,7 @@ if the document specifies another type of workload. Returns null if the [Mapping
 getVolume(filter): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:150
+Defined in: documentExtensions.d.ts:153
 
 Returns the first [Mapping](Mapping.md) under ".spec.volumes" if the document specifies a Pod or ".spec.template.spec.volumes"
 if the document specifies another type of workload that the filter function returns true for.
@@ -688,7 +688,7 @@ Returns null if the [Mapping](Mapping.md) is not found.
 getVolumes(): Sequence;
 ```
 
-Defined in: documentExtensions.d.ts:156
+Defined in: documentExtensions.d.ts:159
 
 Returns the [Sequence](Sequence.md) for ".spec.volumes" if the document specifies a Pod or ".spec.template.spec.volumes"
 if the document specifies another type of workload. Returns null if the [Sequence](Sequence.md) is not found.
@@ -705,7 +705,7 @@ if the document specifies another type of workload. Returns null if the [Sequenc
 getWorkloadAnnotations(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:174
+Defined in: documentExtensions.d.ts:177
 
 Returns the [Mapping](Mapping.md) for ".metadata.annotations" if the document specifies a Pod or ".spec.template.metadata.annotations"
 if the document specifies another type of workload. Returns null if the [Mapping](Mapping.md) is not found.
@@ -722,7 +722,7 @@ if the document specifies another type of workload. Returns null if the [Mapping
 getWorkloadLabels(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:168
+Defined in: documentExtensions.d.ts:171
 
 Returns the [Mapping](Mapping.md) for ".metadata.labels" if the document specifies a Pod or ".spec.template.metadata.labels"
 if the document specifies another type of workload. Returns null if the [Mapping](Mapping.md) is not found.
@@ -739,7 +739,7 @@ if the document specifies another type of workload. Returns null if the [Mapping
 getWorkloadMetadata(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:162
+Defined in: documentExtensions.d.ts:165
 
 Returns the [Mapping](Mapping.md) for ".metadata" if the document specifies a Pod or ".spec.template.metadata" if the document
 specifies another type of workload. Returns null if the [Mapping](Mapping.md) is not found.
@@ -756,7 +756,7 @@ specifies another type of workload. Returns null if the [Mapping](Mapping.md) is
 getWorkloadSpec(): Mapping;
 ```
 
-Defined in: documentExtensions.d.ts:89
+Defined in: documentExtensions.d.ts:92
 
 Returns the [Mapping](Mapping.md) for ".spec" if the document specifies a Pod or ".spec.template.spec" if the document
 specifies another type of workload. Returns null if the [Mapping](Mapping.md) is not found.
@@ -773,7 +773,7 @@ specifies another type of workload. Returns null if the [Mapping](Mapping.md) is
 isClusterRole(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:180
+Defined in: documentExtensions.d.ts:183
 
 Returns true if the document is a ClusterRole.
 
@@ -789,7 +789,7 @@ Returns true if the document is a ClusterRole.
 isClusterRoleBinding(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:183
+Defined in: documentExtensions.d.ts:186
 
 Returns true if the document is a ClusterRoleBinding.
 
@@ -805,7 +805,7 @@ Returns true if the document is a ClusterRoleBinding.
 isConfigMap(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:186
+Defined in: documentExtensions.d.ts:189
 
 Returns true if the document is a ConfigMap.
 
@@ -821,7 +821,7 @@ Returns true if the document is a ConfigMap.
 isCronJob(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:189
+Defined in: documentExtensions.d.ts:192
 
 Returns true if the document is a CronJob.
 
@@ -837,7 +837,7 @@ Returns true if the document is a CronJob.
 isCustomResourceDefinition(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:192
+Defined in: documentExtensions.d.ts:195
 
 Returns true if the document is a CustomResourceDefinition.
 
@@ -853,7 +853,7 @@ Returns true if the document is a CustomResourceDefinition.
 isDaemonSet(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:195
+Defined in: documentExtensions.d.ts:198
 
 Returns true if the document is a DaemonSet.
 
@@ -869,7 +869,7 @@ Returns true if the document is a DaemonSet.
 isDeployment(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:198
+Defined in: documentExtensions.d.ts:201
 
 Returns true if the document is a Deployment.
 
@@ -885,7 +885,7 @@ Returns true if the document is a Deployment.
 isHorizontalPodAutoscaler(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:201
+Defined in: documentExtensions.d.ts:204
 
 Returns true if the document is a HorizontalPodAutoscaler.
 
@@ -901,7 +901,7 @@ Returns true if the document is a HorizontalPodAutoscaler.
 isIngress(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:204
+Defined in: documentExtensions.d.ts:207
 
 Returns true if the document is an Ingress.
 
@@ -917,7 +917,7 @@ Returns true if the document is an Ingress.
 isJob(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:207
+Defined in: documentExtensions.d.ts:210
 
 Returns true if the document is a Job.
 
@@ -933,7 +933,7 @@ Returns true if the document is a Job.
 isNamespace(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:210
+Defined in: documentExtensions.d.ts:213
 
 Returns true if the document is a Namespace.
 
@@ -949,7 +949,7 @@ Returns true if the document is a Namespace.
 isOfKind(apiVersion, kind): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:177
+Defined in: documentExtensions.d.ts:180
 
 Returns true if the document has the given apiVersion and kind.
 
@@ -972,7 +972,7 @@ Returns true if the document has the given apiVersion and kind.
 isPersistentVolume(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:213
+Defined in: documentExtensions.d.ts:216
 
 Returns true if the document is a PersistentVolume.
 
@@ -988,7 +988,7 @@ Returns true if the document is a PersistentVolume.
 isPersistentVolumeClaim(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:216
+Defined in: documentExtensions.d.ts:219
 
 Returns true if the document is a PersistentVolumeClaim.
 
@@ -1004,7 +1004,7 @@ Returns true if the document is a PersistentVolumeClaim.
 isPod(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:219
+Defined in: documentExtensions.d.ts:222
 
 Returns true if the document is a Pod.
 
@@ -1020,7 +1020,7 @@ Returns true if the document is a Pod.
 isReplicaSet(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:222
+Defined in: documentExtensions.d.ts:225
 
 Returns true if the document is a ReplicaSet.
 
@@ -1036,7 +1036,7 @@ Returns true if the document is a ReplicaSet.
 isRole(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:225
+Defined in: documentExtensions.d.ts:228
 
 Returns true if the document is a Role.
 
@@ -1052,7 +1052,7 @@ Returns true if the document is a Role.
 isRoleBinding(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:228
+Defined in: documentExtensions.d.ts:231
 
 Returns true if the document is a RoleBinding.
 
@@ -1068,7 +1068,7 @@ Returns true if the document is a RoleBinding.
 isSecret(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:231
+Defined in: documentExtensions.d.ts:234
 
 Returns true if the document is a Secret.
 
@@ -1084,7 +1084,7 @@ Returns true if the document is a Secret.
 isService(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:234
+Defined in: documentExtensions.d.ts:237
 
 Returns true if the document is a Service.
 
@@ -1100,7 +1100,7 @@ Returns true if the document is a Service.
 isServiceAccount(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:237
+Defined in: documentExtensions.d.ts:240
 
 Returns true if the document is a ServiceAccount.
 
@@ -1116,7 +1116,7 @@ Returns true if the document is a ServiceAccount.
 isStatefulSet(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:240
+Defined in: documentExtensions.d.ts:243
 
 Returns true if the document is a StatefulSet.
 
@@ -1132,7 +1132,7 @@ Returns true if the document is a StatefulSet.
 isWorkload(): boolean;
 ```
 
-Defined in: documentExtensions.d.ts:243
+Defined in: documentExtensions.d.ts:246
 
 Returns true if the document is one of these: CronJob, DaemonSet, Deployment, Job, Pod, ReplicaSet, StatefulSet.
 
@@ -1142,13 +1142,57 @@ Returns true if the document is one of these: CronJob, DaemonSet, Deployment, Jo
 
 ***
 
+### provisionAfter()
+
+```ts
+provisionAfter(other): void;
+```
+
+Defined in: document.d.ts:36
+
+Apply and wait for this document after the given document. Documents must be in the same group.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `other` | `Document` |
+
+#### Returns
+
+`void`
+
+***
+
+### provisionBefore()
+
+```ts
+provisionBefore(other): void;
+```
+
+Defined in: document.d.ts:39
+
+Apply and wait for this document before the given document. Documents must be in the same group.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `other` | `Document` |
+
+#### Returns
+
+`void`
+
+***
+
 ### setAnnotation()
 
 ```ts
 setAnnotation(key, value): void;
 ```
 
-Defined in: documentExtensions.d.ts:261
+Defined in: documentExtensions.d.ts:264
 
 Sets the given key value pair to ".metadata.annotations".
 
@@ -1171,7 +1215,7 @@ Sets the given key value pair to ".metadata.annotations".
 setAnnotations(annotations): void;
 ```
 
-Defined in: documentExtensions.d.ts:264
+Defined in: documentExtensions.d.ts:267
 
 Sets the given key value pairs to ".metadata.annotations". Keys are sorted alphabetically.
 
@@ -1193,7 +1237,7 @@ Sets the given key value pairs to ".metadata.annotations". Keys are sorted alpha
 setLabel(key, value): void;
 ```
 
-Defined in: documentExtensions.d.ts:252
+Defined in: documentExtensions.d.ts:255
 
 Sets the given key value pair to ".metadata.labels".
 
@@ -1218,7 +1262,7 @@ Sets the given key value pair to ".metadata.labels".
 setLabels(labels): void;
 ```
 
-Defined in: documentExtensions.d.ts:255
+Defined in: documentExtensions.d.ts:258
 
 Sets the given key value pairs to ".metadata.labels". Keys are sorted alphabetically.
 
@@ -1238,7 +1282,7 @@ Sets the given key value pairs to ".metadata.labels". Keys are sorted alphabetic
 setLabels(labels, labelNodes): void;
 ```
 
-Defined in: documentExtensions.d.ts:258
+Defined in: documentExtensions.d.ts:261
 
 Sets the given key value pairs to the specified nodes on the document. Keys are sorted alphabetically.
 
@@ -1261,7 +1305,7 @@ Sets the given key value pairs to the specified nodes on the document. Keys are 
 setName(value): void;
 ```
 
-Defined in: documentExtensions.d.ts:246
+Defined in: documentExtensions.d.ts:249
 
 Sets the given value to ".metadata.name".
 
@@ -1283,7 +1327,7 @@ Sets the given value to ".metadata.name".
 setNamespace(value): void;
 ```
 
-Defined in: documentExtensions.d.ts:249
+Defined in: documentExtensions.d.ts:252
 
 Sets the given value to ".metadata.namespace".
 

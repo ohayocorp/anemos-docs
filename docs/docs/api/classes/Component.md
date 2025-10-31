@@ -1,6 +1,6 @@
 # Class: Component
 
-Defined in: component.d.ts:20
+Defined in: component.d.ts:21
 
 Component consists of a series of actions. The action are sorted by their
 step and then executed by builder.
@@ -21,7 +21,7 @@ new Component(): Component;
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="actions"></a> `actions` | readonly [`Action`](Action.md)[] | Actions of this component. Don't modify this array directly, use [Component.addAction](#addaction). | component.d.ts:24 |
+| <a id="actions"></a> `actions` | readonly [`Action`](Action.md)[] | Actions of this component. Don't modify this array directly, use [Component.addAction](#addaction). | component.d.ts:25 |
 
 ## Methods
 
@@ -31,7 +31,7 @@ new Component(): Component;
 addAction(step, callback): void;
 ```
 
-Defined in: component.d.ts:31
+Defined in: component.d.ts:32
 
 Adds a new action to the component.
 
@@ -54,7 +54,7 @@ Adds a new action to the component.
 getComponentType(): string;
 ```
 
-Defined in: component.d.ts:91
+Defined in: component.d.ts:92
 
 Gets the type of the component.
 
@@ -77,7 +77,7 @@ that this component belongs to. It is not used by the builder, but can be used b
 getCustomData(key): any;
 ```
 
-Defined in: component.d.ts:40
+Defined in: component.d.ts:41
 
 Gets the custom data associated with the given key.
 
@@ -106,7 +106,7 @@ about the component. It is not used by the builder, but can be used by other com
 getIdentifier(): string;
 ```
 
-Defined in: component.d.ts:75
+Defined in: component.d.ts:76
 
 Gets the identifier of the component.
 
@@ -129,7 +129,7 @@ It is not used by the builder, but can be used by other components to identify t
 getMetadata(key): string;
 ```
 
-Defined in: component.d.ts:58
+Defined in: component.d.ts:59
 
 Gets the metadata associated with the given key.
 
@@ -152,13 +152,101 @@ about the component. It is not used by the builder, but can be used by other com
 
 ***
 
+### provisionAfter()
+
+#### Call Signature
+
+```ts
+provisionAfter(provisioner): void;
+```
+
+Defined in: component.d.ts:106
+
+Provisions all document groups associated with this component after the given provisioner.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `provisioner` | [`Provisioner`](Provisioner.md) | The provisioner to run after. |
+
+##### Returns
+
+`void`
+
+#### Call Signature
+
+```ts
+provisionAfter(component): void;
+```
+
+Defined in: component.d.ts:118
+
+Provisions all document groups associated with this component after all the document groups associated with the given component.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `component` | `Component` | The component to run after. |
+
+##### Returns
+
+`void`
+
+***
+
+### provisionBefore()
+
+#### Call Signature
+
+```ts
+provisionBefore(provisioner): void;
+```
+
+Defined in: component.d.ts:112
+
+Provisions all document groups associated with this component before the given provisioner.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `provisioner` | [`Provisioner`](Provisioner.md) | The provisioner to run before. |
+
+##### Returns
+
+`void`
+
+#### Call Signature
+
+```ts
+provisionBefore(component): void;
+```
+
+Defined in: component.d.ts:124
+
+Provisions all document groups associated with this component before all the document groups associated with the given component.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `component` | `Component` | The component to run before. |
+
+##### Returns
+
+`void`
+
+***
+
 ### setComponentType()
 
 ```ts
 setComponentType(componentType): void;
 ```
 
-Defined in: component.d.ts:99
+Defined in: component.d.ts:100
 
 Sets the component type of the component.
 
@@ -185,7 +273,7 @@ that this component belongs to. It is not used by the builder, but can be used b
 setCustomData(key, value): void;
 ```
 
-Defined in: component.d.ts:49
+Defined in: component.d.ts:50
 
 Sets the custom data associated with the given key.
 
@@ -213,7 +301,7 @@ about the component. It is not used by the builder, but can be used by other com
 setIdentifier(identifier): void;
 ```
 
-Defined in: component.d.ts:83
+Defined in: component.d.ts:84
 
 Sets the identifier of the component.
 
@@ -240,7 +328,7 @@ It is not used by the builder, but can be used by other components to identify t
 setMetadata(key, value): void;
 ```
 
-Defined in: component.d.ts:67
+Defined in: component.d.ts:68
 
 Sets the metadata associated with the given key.
 

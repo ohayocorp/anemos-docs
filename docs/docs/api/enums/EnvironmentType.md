@@ -9,6 +9,7 @@ For example, in the development environment, some components may disable high av
 
 | Enumeration Member | Value | Defined in |
 | ------ | ------ | ------ |
-| <a id="development"></a> `Development` | `number` | builderOptions.d.ts:29 |
-| <a id="production"></a> `Production` | `number` | builderOptions.d.ts:31 |
-| <a id="testing"></a> `Testing` | `number` | builderOptions.d.ts:30 |
+| <a id="development"></a> `Development` | `number` | builderOptions.d.ts:30 |
+| <a id="production"></a> `Production` | `number` | builderOptions.d.ts:32 |
+| <a id="testing"></a> `Testing` | `number` | builderOptions.d.ts:31 |
+| <a id="unknown"></a> `Unknown` | `number` | builderOptions.d.ts:29 |

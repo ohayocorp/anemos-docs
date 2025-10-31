@@ -4,7 +4,7 @@
 const populateKubernetesResources: Step;
 ```
 
-Defined in: step.d.ts:19
+Defined in: step.d.ts:20
 
 Use this step to populate [KubernetesResource](../classes/KubernetesResource.md) resources so that other components can rely on this
 information to modify existing resources or generate extra resources.

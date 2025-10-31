@@ -1,6 +1,6 @@
 import * as anemos from "@ohayocorp/anemos";
 
-const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
+const builder = new anemos.Builder();
 
 // Create an empty document. The root of a document is set to an empty `Mapping` by default.
 const empty = new anemos.Document("empty.yaml");

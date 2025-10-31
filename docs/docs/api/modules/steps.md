@@ -6,6 +6,7 @@ Built-in steps in execution order:
 - [generateResources](../variables/steps.generateResources.md)                      -> 5
 - [generateResourcesBasedOnOtherResources](../variables/steps.generateResourcesBasedOnOtherResources.md) -> 5,1
 - [modify](../variables/steps.modify.md)                                 -> 6
+- [specifyProvisionerDependencies](../variables/steps.specifyProvisionerDependencies.md)         -> 7
 - [output](../variables/steps.output.md)                                 -> 99
 
 ## Variables
@@ -16,3 +17,4 @@ Built-in steps in execution order:
 - [output](../variables/steps.output.md)
 - [populateKubernetesResources](../variables/steps.populateKubernetesResources.md)
 - [sanitize](../variables/steps.sanitize.md)
+- [specifyProvisionerDependencies](../variables/steps.specifyProvisionerDependencies.md)

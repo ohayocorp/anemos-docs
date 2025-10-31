@@ -4,6 +4,6 @@
 const output: Step;
 ```
 
-Defined in: step.d.ts:39
+Defined in: step.d.ts:43
 
 Write the outputs, e.g. documents and additional files in this step.

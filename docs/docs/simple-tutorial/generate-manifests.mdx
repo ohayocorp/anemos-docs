@@ -8,17 +8,19 @@ import CodeBlock from '@theme/CodeBlock';
 
 import IndexJs from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-manifests/index.js';
 import PodYaml from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-manifests/output/manifests/pod.yaml';
+import ObjectJs from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-manifests/object.js';
+import HelmChartJs from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-manifests/helm-chart.js';
 import VariablesJs from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-manifests/variables.js';
 import OnModifyJs from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-manifests/on-modify.js';
 import OnModifyPodYaml from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-manifests/on-modify/output/manifests/pod.yaml';
 
 # Generating Kubernetes Manifests
 
-In Anemos, you can define all your Kubernetes manifests in a single file using JavaScript. You can import
-other local and remote files, use variables, and even create functions to generate complex manifests. You can also
+In Anemos, it is possible to define all your Kubernetes manifests in a single JavaScript file. You can import
+other local and remote files, use variables, and create functions to generate complex manifests. You can also
 use NPM packages and a more structured approach to define your manifests, but that's not the focus of this tutorial.
 
-Let's start with a simple `index.js` file that will generate a Kubernetes manifests for us and then
+Let's start with a simple `index.js` file that will generate a Kubernetes manifest for us and then
 we will inspect how it works.
 
 <CodeBlock language="javascript" title="index.js" showLineNumbers>
@@ -38,26 +40,22 @@ the core library is implemented in native code, eliminating the need for depende
     {IndexJs.split('\n').slice(2, 3).join('\n')}
 </CodeBlock>
 
-Here, we instantiate the `anemos.Builder` class. The `Builder` takes information about the target
-Kubernetes cluster and the deployment environment (e.g., development, test, production). This context
-allows Anemos packages to tailor the generated manifests to the specific environment. For instance, packages can
-generate OpenShift `Route`s instead of `Ingress` definitions if the distribution is OpenShift, or adjust replica
-counts based on the environment type.
+Here, we instantiate the `anemos.Builder` class. `Builder` drives the entire manifest generation process.
 
 <CodeBlock language="javascript" title="index.js" showLineNumbers={5}>
-    {IndexJs.split('\n').slice(4, 19).join('\n')}
+    {IndexJs.split('\n').slice(4, 17).join('\n')}
 </CodeBlock>
 
 This code snippet defines a Pod manifest using a YAML string. Documents that are added to the `Builder`
-are output as Kubernetes manifests. We will see how to customize these manifests below.
+are output as Kubernetes manifests. We will see how to customize these manifests in the below section.
 
-<CodeBlock language="javascript" title="index.js" showLineNumbers={21}>
-    {IndexJs.split('\n').slice(20, 21).join('\n')}
+<CodeBlock language="javascript" title="index.js" showLineNumbers={34}>
+    {IndexJs.split('\n').slice(18, 19).join('\n')}
 </CodeBlock>
 
 This line invokes the `build` method, which orchestrates the manifest generation process.
 
-## Generating the Manifests
+### Outputing the Manifests
 
 To generate the Kubernetes manifests, run the following command in your terminal:
 
@@ -65,18 +63,43 @@ To generate the Kubernetes manifests, run the following command in your terminal
 anemos build index.js
 ```
 
-This command will execute the `index.js` file, and Anemos will generate the Kubernetes manifests based on the
+This command will execute the `index.js` file and Anemos will generate the Kubernetes manifests based on the
 defined documents. The output will be written into the `output` directory by default. Our pod definition will be
 the same as the one defined in the `index.js` file, since we did not customize it further.
 
-<CodeBlock language="yaml" title="pod.yaml" showLineNumbers>
+<CodeBlock language="yaml" title="pod-example-app.yaml" showLineNumbers>
     {PodYaml}
 </CodeBlock>
+
+## Defining Manifests Using JavaScript Objects
+
+<CodeBlock language="javascript" title="index.js">
+    {ObjectJs}
+</CodeBlock>
+
+This code snippet shows another way to define Kubernetes manifests using JavaScript objects. Here, we define a Service manifest using the `anemos.k8s.Service` class. Note that the `apiVersion` and `kind` fields are not required when using the provided classes, as they are inferred from the class itself.
+
+This approach allows you to leverage JavaScript data structures and Kubernetes API types. Kubernetes object schemas are built into Anemos, enabling features like auto-completion and type checking when defining manifests.
+
+## Using Helm Charts
+
+You can add Helm charts to the builder using the `addHelmChart` method. Here is an example of how to add a
+Helm chart to your `index.js` file:
+
+<CodeBlock language="javascript" title="index.js" showLineNumbers>
+    {HelmChartJs}
+</CodeBlock>
+
+This code snippet adds the `cert-manager` Helm chart to the builder. When you run the `anemos build index.js`
+command, Anemos will fetch the Helm chart, render it with the provided values, and include the generated manifests
+in the output directory along with the other manifests. For more detail on using Helm charts with Anemos, check out the
+[Helm Interoperability](/docs/reference/helm-interop) page.
 
 ## Customizing the Manifests
 
 It is possible to customize the generated manifests in two ways: by using variables when defining the manifests
-or by modifying the document during the `modify` step.
+or by modifying the document during the `modify` step. Steps are explained in more detail in the
+[Components and Actions](/docs/tutorial/components-and-actions) tutorial.
 
 ### Using Variables
 
@@ -85,7 +108,7 @@ name, namespace, and image and use it in your Pod definition. JavaScript templat
 in backticks (``` `` ```), allow you to embed expressions within strings (`${expression}`), making it easy
 to use variables in your manifests.
 
-<CodeBlock language="javascript" title="pod.yaml" showLineNumbers>
+<CodeBlock language="javascript" title="index.js" showLineNumbers>
     {VariablesJs}
 </CodeBlock>
 
@@ -105,7 +128,7 @@ we have defined earlier and add a label to it.
     </CodeBlock>
   </TabItem>
 
-  <TabItem value="pod.yaml">
+  <TabItem value="pod-example-app.yaml">
     <CodeBlock language="yaml" showLineNumbers>
       {OnModifyPodYaml}
     </CodeBlock>

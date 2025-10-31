@@ -1,14 +1,14 @@
 # Class: BuildContext
 
-Defined in: buildContext.d.ts:8
+Defined in: buildContext.d.ts:14
 
 ## Properties
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="builderoptions"></a> `builderOptions` | [`BuilderOptions`](BuilderOptions.md) | Common options that are used by the builder components. | buildContext.d.ts:12 |
-| <a id="customdata"></a> `customData` | `Record`\<`string`, `any`\> | Custom data that can be used by the builder components. | buildContext.d.ts:18 |
-| <a id="kubernetesresourceınfo"></a> `kubernetesResourceInfo` | [`KubernetesResourceInfo`](KubernetesResourceInfo.md) | Contains information about the API resources defined in the target cluster. | buildContext.d.ts:15 |
+| <a id="builderoptions"></a> `builderOptions` | [`BuilderOptions`](BuilderOptions.md) | Common options that are used by the builder components. | buildContext.d.ts:18 |
+| <a id="customdata"></a> `customData` | `Record`\<`string`, `any`\> | Custom data that can be used by the builder components. | buildContext.d.ts:24 |
+| <a id="kubernetesresourceinfo"></a> `kubernetesResourceInfo` | [`KubernetesResourceInfo`](KubernetesResourceInfo.md) | Contains information about the API resources defined in the target cluster. | buildContext.d.ts:21 |
 
 ## Methods
 
@@ -20,7 +20,7 @@ Defined in: buildContext.d.ts:8
 addAdditionalFile(additionalFile): void;
 ```
 
-Defined in: buildContext.d.ts:79
+Defined in: buildContext.d.ts:51
 
 Adds given additional file to a [DocumentGroup](DocumentGroup.md) named "".
 
@@ -40,10 +40,10 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 #### Call Signature
 
 ```ts
-addAdditionalFile(documentGroupName, additionalFile): void;
+addAdditionalFile(documentGroupPath, additionalFile): void;
 ```
 
-Defined in: buildContext.d.ts:87
+Defined in: buildContext.d.ts:59
 
 Adds the given additional file to a [DocumentGroup](DocumentGroup.md) with the given name during the [steps.generateResources](../variables/steps.generateResources.md) step.
 
@@ -54,7 +54,7 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 
 | Parameter | Type |
 | ------ | ------ |
-| `documentGroupName` | `string` |
+| `documentGroupPath` | `string` |
 | `additionalFile` | [`AdditionalFile`](AdditionalFile.md) |
 
 ##### Returns
@@ -71,7 +71,7 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 addDocument(document): void;
 ```
 
-Defined in: buildContext.d.ts:26
+Defined in: buildContext.d.ts:32
 
 Adds the given document to a [DocumentGroup](DocumentGroup.md) named "".
 
@@ -91,128 +91,21 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 #### Call Signature
 
 ```ts
-addDocument(documentGroupName, document): void;
+addDocument(options): void;
 ```
 
-Defined in: buildContext.d.ts:34
+Defined in: buildContext.d.ts:40
 
-Adds the given document to a [DocumentGroup](DocumentGroup.md) with the given name during the [steps.generateResources](../variables/steps.generateResources.md) step.
+Adds a new document using the provided options during the [steps.generateResources](../variables/steps.generateResources.md) step.
 
-Checks for an existing [DocumentGroup](DocumentGroup.md) with the same name and adds the document to it if it exists.
+Checks for an existing [DocumentGroup](DocumentGroup.md) with the same name as `options.documentGroup` and adds the document to it if it exists.
 Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 
 ##### Parameters
 
 | Parameter | Type |
 | ------ | ------ |
-| `documentGroupName` | `string` |
-| `document` | [`Document`](Document.md) |
-
-##### Returns
-
-`void`
-
-#### Call Signature
-
-```ts
-addDocument(path, yamlContent): void;
-```
-
-Defined in: buildContext.d.ts:42
-
-Adds a new document to a [DocumentGroup](DocumentGroup.md) named "" by parsing given YAML string as a [Document](Document.md).
-
-Checks for an existing [DocumentGroup](DocumentGroup.md) with name "" and adds the document to it if it exists.
-Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
-
-##### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `path` | `string` |
-| `yamlContent` | `string` |
-
-##### Returns
-
-`void`
-
-#### Call Signature
-
-```ts
-addDocument(
-   documentGroupName, 
-   path, 
-   yamlContent): void;
-```
-
-Defined in: buildContext.d.ts:51
-
-Adds a new document to a [DocumentGroup](DocumentGroup.md) with the given name during the [steps.generateResources](../variables/steps.generateResources.md)
-step by parsing given YAML string as a [Document](Document.md).
-
-Checks for an existing [DocumentGroup](DocumentGroup.md) with the same name and adds the document to it if it exists.
-Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
-
-##### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `documentGroupName` | `string` |
-| `path` | `string` |
-| `yamlContent` | `string` |
-
-##### Returns
-
-`void`
-
-#### Call Signature
-
-```ts
-addDocument(path, root): void;
-```
-
-Defined in: buildContext.d.ts:59
-
-Adds a new document to a [DocumentGroup](DocumentGroup.md) named "" by converting given object to a [Document](Document.md).
-
-Checks for an existing [DocumentGroup](DocumentGroup.md) with name "" and adds the document to it if it exists.
-Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
-
-##### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `path` | `string` |
-| `root` | `object` \| [`Mapping`](Mapping.md) |
-
-##### Returns
-
-`void`
-
-#### Call Signature
-
-```ts
-addDocument(
-   documentGroupName, 
-   path, 
-   root): void;
-```
-
-Defined in: buildContext.d.ts:68
-
-Adds a new document to a [DocumentGroup](DocumentGroup.md) with the given name during the [steps.generateResources](../variables/steps.generateResources.md)
-step by converting given object to a [Document](Document.md).
-
-Checks for an existing [DocumentGroup](DocumentGroup.md) with the same name and adds the document to it if it exists.
-Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
-
-##### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `documentGroupName` | `string` |
-| `path` | `string` |
-| `root` | `object` \| [`Mapping`](Mapping.md) |
+| `options` | [`AddDocumentOptions`](AddDocumentOptions.md) |
 
 ##### Returns
 
@@ -226,7 +119,7 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 addDocumentGroup(documentGroup): void;
 ```
 
-Defined in: buildContext.d.ts:71
+Defined in: buildContext.d.ts:43
 
 Adds given group to the document groups list.
 
@@ -248,7 +141,7 @@ Adds given group to the document groups list.
 getAllDocuments(): Document[];
 ```
 
-Defined in: buildContext.d.ts:99
+Defined in: buildContext.d.ts:71
 
 Returns all documents inside all document groups.
 
@@ -264,7 +157,7 @@ Returns all documents inside all document groups.
 getAllDocumentsSorted(): Document[];
 ```
 
-Defined in: buildContext.d.ts:102
+Defined in: buildContext.d.ts:74
 
 Returns all documents inside all document groups sorted by their file path.
 
@@ -282,7 +175,7 @@ Returns all documents inside all document groups sorted by their file path.
 getDocument(predicate): Document;
 ```
 
-Defined in: buildContext.d.ts:105
+Defined in: buildContext.d.ts:77
 
 Returns the first document that satisfies the given predicate. Returns null if no document is found.
 
@@ -302,7 +195,7 @@ Returns the first document that satisfies the given predicate. Returns null if n
 getDocument(path): Document;
 ```
 
-Defined in: buildContext.d.ts:108
+Defined in: buildContext.d.ts:80
 
 Returns the first document that has the given path. Returns null if no document is found.
 
@@ -324,7 +217,7 @@ Returns the first document that has the given path. Returns null if no document 
 getDocumentGroup(name): DocumentGroup;
 ```
 
-Defined in: buildContext.d.ts:93
+Defined in: buildContext.d.ts:65
 
 Returns the document group that matches the specified name.
 
@@ -346,7 +239,7 @@ Returns the document group that matches the specified name.
 getDocumentGroups(component?): DocumentGroup[];
 ```
 
-Defined in: buildContext.d.ts:96
+Defined in: buildContext.d.ts:68
 
 Returns all document groups. If component is provided, only returns groups added by that component.
 
@@ -368,7 +261,7 @@ Returns all document groups. If component is provided, only returns groups added
 removeDocumentGroup(documentGroup): void;
 ```
 
-Defined in: buildContext.d.ts:90
+Defined in: buildContext.d.ts:62
 
 Removes given group from the document groups list.
 

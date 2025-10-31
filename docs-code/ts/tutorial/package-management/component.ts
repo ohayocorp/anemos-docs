@@ -2,79 +2,81 @@ import * as anemos from "@ohayocorp/anemos";
 import { Options } from "./options";
 
 export class Component extends anemos.Component {
-    options: Options;
+  options: Options;
 
-    constructor(options?: Options) {
-        super();
+  constructor(options?: Options) {
+    super();
 
-        this.options = options ?? {};
-        
-        this.addAction(anemos.steps.sanitize, this.sanitize);
-        this.addAction(anemos.steps.generateResources, this.generateResources);
-    }
+    this.options = options ?? {};
 
-    sanitize = () => {
-        // Assign default values to the options if they are not provided.
-        const options = this.options;
+    this.addAction(anemos.steps.sanitize, this.sanitize);
+    this.addAction(anemos.steps.generateResources, this.generateResources);
+  }
 
-        options.name ??= "example-app";
-        options.namespace ??= "default";
-        options.image ??= "nginx";
-        options.replicas ??= 1;
-    };
+  sanitize = () => {
+    // Assign default values to the options if they are not provided.
+    const options = this.options;
 
-    generateResources = (context: anemos.BuildContext) => {
-        const name = this.options.name;
-        const namespace = this.options.namespace;
-        const image = this.options.image;
-        const replicas = this.options.replicas;
+    options.name ??= "example-app";
+    options.namespace ??= "default";
+    options.image ??= "nginx";
+    options.replicas ??= 1;
+  };
 
-        context.addDocument(
-            `deployment.yaml`,
-            `
-            apiVersion: apps/v1
-            kind: Deployment
+  generateResources = (context: anemos.BuildContext) => {
+    const name = this.options.name;
+    const namespace = this.options.namespace;
+    const image = this.options.image;
+    const replicas = this.options.replicas;
+
+    context.addDocument({
+      path: `deployment.yaml`,
+      content: `
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: ${name}
+          namespace: ${namespace}
+        spec:
+          replicas: ${replicas}
+          selector:
+            matchLabels:
+              app: ${name}
+          template:
             metadata:
-              name: ${name}
-              namespace: ${namespace}
+              labels:
+                app: ${name}
             spec:
-              replicas: ${replicas}
-              selector:
-                matchLabels:
-                  app: ${name}
-              template:
-                metadata:
-                  labels:
-                    app: ${name}
-                spec:
-                  containers:
-                    - name: app
-                      image: ${image}
-                      ports:
-                        - containerPort: 80
-            `);
+              containers:
+                - name: app
+                  image: ${image}
+                  ports:
+                    - containerPort: 80
+        `
+    });
 
-        context.addDocument(
-            `service.yaml`,
+    context.addDocument({
+      path: `service.yaml`,
+      content: {
+        apiVersion: "v1",
+        kind: "Service",
+        metadata: {
+          name: name,
+          namespace: namespace,
+        },
+        spec: {
+          selector: {
+            app: name
+          },
+          ports: [
             {
-                apiVersion: "v1",
-                kind: "Service",
-                metadata: {
-                    name: name,
-                    namespace: namespace,
-                },
-                spec: {
-                    selector: {
-                        app: name
-                    },
-                    ports: [
-                        {
-                            protocol: "TCP",
-                            port: 80,
-                            targetPort: 80
-                        }
-                    ]
-                }
-            });
-    };
+              protocol: "TCP",
+              port: 80,
+              targetPort: 80
+            }
+          ]
+        }
+      }
+    });
+  };
 }

@@ -22,48 +22,49 @@ function add(builder, options) {
     ingress.pathType ??= "Prefix";
   }
 
-  builder.addDocument(
-    name,
-    `deployment.yaml`,
-    `
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: ${name}
-      namespace: ${namespace}
-    spec:
-      replicas: ${replicaCount}
-      selector:
-        matchLabels:
-          app: ${name}
-      template:
-        metadata:
-          labels:
+  builder.addDocument({
+    documentGroup: name,
+    path: `deployment.yaml`,
+    content: `
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: ${name}
+        namespace: ${namespace}
+      spec:
+        replicas: ${replicaCount}
+        selector:
+          matchLabels:
             app: ${name}
-        spec:
-          containers:
-            - name: "echo"
-              image: "${image}"
-              args:
-                - "-text=Hello, Anemos!"
-              ports:
-                - name: "http"
-                  containerPort: ${containerPort}
-                  protocol: "TCP"
-              livenessProbe:
-                httpGet:
-                  path: /
-                  port: ${containerPort}
-              readinessProbe:
-                httpGet:
-                  path: /
-                  port: ${containerPort}
-    `);
+        template:
+          metadata:
+            labels:
+              app: ${name}
+          spec:
+            containers:
+              - name: "echo"
+                image: "${image}"
+                args:
+                  - "-text=Hello, Anemos!"
+                ports:
+                  - name: "http"
+                    containerPort: ${containerPort}
+                    protocol: "TCP"
+                livenessProbe:
+                  httpGet:
+                    path: /
+                    port: ${containerPort}
+                readinessProbe:
+                  httpGet:
+                    path: /
+                    port: ${containerPort}
+      `
+  });
 
-  builder.addDocument(
-    name,
-    `service.yaml`,
-    `
+  builder.addDocument({
+    documentGroup: name,
+    path: `service.yaml`,
+    content: `
       apiVersion: v1
       kind: Service
       metadata:
@@ -76,31 +77,33 @@ function add(builder, options) {
             port: ${service.port}
             targetPort: "http"
             protocol: TCP
-      `);
+      `
+  });
 
   if (ingress) {
-    builder.addDocument(
-      name,
-      `ingress.yaml`,
-      `
-      apiVersion: networking.k8s.io/v1
-      kind: Ingress
-      metadata:
-        name: ${name}
-        namespace: ${namespace}
-      spec:
-        rules:
-          - host: ${ingress.host}
-            http:
-              paths:
-                - path: ${ingress.path}
-                  pathType: ${ingress.pathType}
-                  backend:
-                    service:
-                      name: ${name}
-                      port:
-                        number: ${service.port}
-      `);
+    builder.addDocument({
+      documentGroup: name,
+      path: `ingress.yaml`,
+      content: `
+        apiVersion: networking.k8s.io/v1
+        kind: Ingress
+        metadata:
+          name: ${name}
+          namespace: ${namespace}
+        spec:
+          rules:
+            - host: ${ingress.host}
+              http:
+                paths:
+                  - path: ${ingress.path}
+                    pathType: ${ingress.pathType}
+                    backend:
+                      service:
+                        name: ${name}
+                        port:
+                          number: ${service.port}
+        `
+    });
   }
 }
 

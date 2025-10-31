@@ -316,18 +316,25 @@ function Features() {
 export function ApplyOutput(): ReactNode {
   return (
     <>
-      <LogInfo time='09:44:11.880'>Starting to build documents</LogInfo>
+      <LogInfo time='16:47:31.358'>Starting to build documents</LogInfo>
       <LogInfo time='09:44:11.881'>Applying actions for step: '<Green>2</Green>' - <Green>Sanitize</Green></LogInfo>
       <LogInfo time='09:44:11.881'>Applying actions for step: '<Green>5</Green>' - <Green>Generate resources</Green></LogInfo>
       <LogInfo time='09:44:11.883'>Applying actions for step: '<Green>100</Green>' - <Green>Apply</Green></LogInfo>
-      <br />
-      <ShellLine>Summary of changes:</ShellLine>
-      <br />
-      <ShellLine>OP  NAMESPACE  RESOURCE</ShellLine>
-      <Green newLine={true}>A   default    deployments/anemos-hello-world</Green>
-      <Green newLine={true}>A   default    services/anemos-hello-world</Green>
-      <br />
-      <LogInfo time='09:44:11.948'>Successfully applied Kubernetes manifests</LogInfo>
+      <LogInfo time='16:47:31.360'>Provision plan:</LogInfo>
+      <LogInfo time='16:47:31.360'>  <Green>APPLY</Green> -&gt; <Green>anemos-hello-world</Green></LogInfo>
+      <LogInfo time='16:47:31.360'>  <Green>WAIT</Green>  -&gt; <Green>anemos-hello-world</Green></LogInfo>
+      <LogInfo time='16:47:31.360'> </LogInfo>
+      <LogInfo time='16:47:31.360'>Applying document group: <Green>anemos-hello-world</Green></LogInfo>
+      <LogInfo time='16:47:31.389'>Summary of changes:</LogInfo>
+      <LogInfo time='16:47:31.390'>OP  NAMESPACE  RESOURCE</LogInfo>
+      <LogInfo time='16:47:31.390'><Green>A   default    deployments/anemos-hello-world</Green></LogInfo>
+      <LogInfo time='16:47:31.390'><Green>A   default    services/anemos-hello-world</Green></LogInfo>
+      <LogInfo time='16:47:31.407'>Successfully applied document group: <Green>anemos-hello-world</Green></LogInfo>
+      <LogInfo time='16:47:31.418'>Resource <Green>Service/anemos-hello-world</Green> is in desired state: Service is ready</LogInfo>
+      <LogInfo time='16:47:31.418'>Waiting for resource <Green>Deployment/anemos-hello-world</Green>, expected=<Green>Current</Green>, actual=<Green>InProgress</Green>: Replicas: 0/1</LogInfo>
+      <LogInfo time='16:47:33.419'>Waiting for resource <Green>Deployment/anemos-hello-world</Green>, expected=<Green>Current</Green>, actual=<Green>InProgress</Green>: Available: 0/1</LogInfo>
+      <LogInfo time='16:47:37.420'>Resource <Green>Deployment/anemos-hello-world</Green> is in desired state: <Green>Deployment is available. Replicas: 1</Green></LogInfo>
+      <LogInfo time='16:47:37.421'>Successfully applied Kubernetes manifests</LogInfo>
     </>
   );
 }
@@ -335,31 +342,37 @@ export function ApplyOutput(): ReactNode {
 export function ApplyValuesOutput(): ReactNode {
   return (
     <>
-      <LogInfo time='09:45:12.724'>Starting to build documents</LogInfo>
+      <LogInfo time='16:56:29.134'>Starting to build documents</LogInfo>
       <LogInfo time='09:45:12.724'>Applying actions for step: '<Green>2</Green>' - <Green>Sanitize</Green></LogInfo>
       <LogInfo time='09:45:12.724'>Applying actions for step: '<Green>5</Green>' - <Green>Generate resources</Green></LogInfo>
       <LogInfo time='09:45:12.724'>Applying actions for step: '<Green>100</Green>' - <Green>Apply</Green></LogInfo>
-      <br />
-      <ShellLine>No changes for <Yellow>services/anemos-hello-world</Yellow></ShellLine>
-      <br />
-      <ShellLine>Changes to be applied:</ShellLine>
-      <br />
-      <ShellLine><Yellow>deployments/anemos-hello-world</Yellow>:</ShellLine>
+      <LogInfo time='16:56:29.137'>Provision plan:</LogInfo>
+      <LogInfo time='16:56:29.137'>  <Green>APPLY</Green> -&gt; <Green>anemos-hello-world</Green></LogInfo>
+      <LogInfo time='16:56:29.137'>  <Green>WAIT</Green>  -&gt; <Green>anemos-hello-world</Green></LogInfo>
+      <LogInfo time='16:56:29.137'> </LogInfo>
+      <LogInfo time='16:56:29.137'>Applying document group: <Green>anemos-hello-world</Green></LogInfo>
+      <LogInfo time='16:56:29.145'>No changes for <Green>services/anemos-hello-world</Green></LogInfo>
+      <LogInfo time='16:56:29.157'>Changes to be applied:</LogInfo>
+      <LogInfo time='16:56:29.157'><Yellow>deployments/anemos-hello-world:</Yellow></LogInfo>
       <ShellLine>  ...</ShellLine>
-      <ShellLine>  uid: b28aff42-7cc6-418b-9137-a98eb0502da1</ShellLine>
+      <ShellLine>    uid: d79bf80e-2432-4d29-96e2-7ee4183d2ba1</ShellLine>
       <ShellLine>  spec:</ShellLine>
       <ShellLine>    progressDeadlineSeconds: 600</ShellLine>
-      <ShellLine>    <Red>replicas: 1</Red></ShellLine>
-      <ShellLine>    <Green>replicas: 3</Green></ShellLine>
+      <ShellLine>    <Green>replicas: 1</Green></ShellLine>
+      <ShellLine>    <Red>replicas: 3</Red></ShellLine>
       <ShellLine>  ...</ShellLine>
       <ShellLine>    readyReplicas: 1</ShellLine>
       <ShellLine>    replicas: 1</ShellLine>
       <ShellLine>    updatedReplicas: 1</ShellLine>
       <br />
-      <ShellLine>OP  NAMESPACE  RESOURCE</ShellLine>
-      <Yellow newLine={true}>M   default    deployments/anemos-hello-world</Yellow>
-      <br />
-      <LogInfo time='09:45:12.787'>Successfully applied Kubernetes manifests</LogInfo>
+      <LogInfo time='16:56:29.157'>Summary of changes:</LogInfo>
+      <LogInfo time='16:56:29.157'>OP  NAMESPACE  RESOURCE</LogInfo>
+      <LogInfo time='16:56:29.157'><Yellow>M   default    deployments/anemos-hello-world</Yellow></LogInfo>
+      <LogInfo time='16:56:29.188'>Successfully applied document group: <Green>anemos-hello-world</Green></LogInfo>
+      <LogInfo time='16:56:29.222'>Resource <Green>Service/anemos-hello-world</Green> is in desired state: <Green>Service is ready</Green></LogInfo>
+      <LogInfo time='16:56:29.223'>Waiting for resource <Green>Deployment/anemos-hello-world</Green>, expected=<Green>Current</Green>, actual=<Green>InProgress</Green>: <Green>Replicas: 1/3</Green></LogInfo>
+      <LogInfo time='16:56:31.203'>Resource <Green>Deployment/anemos-hello-world</Green> is in desired state: <Green>Deployment is available. Replicas: 3</Green></LogInfo>
+      <LogInfo time='16:56:31.203'>Successfully applied Kubernetes manifests</LogInfo>
     </>
   );
 }
@@ -377,15 +390,13 @@ function ListOutput(): ReactNode {
 function DeleteOutput(): ReactNode {
   return (
     <>
-      <ShellLine>Deleting objects for apply set anemos-hello-world:</ShellLine>
-      <br />
-      <ShellLine>NAMESPACE  RESOURCE     NAME</ShellLine>
-      <ShellLine><Red>default    deployments  anemos-hello-world</Red></ShellLine>
-      <ShellLine><Red>default    services     anemos-hello-world</Red></ShellLine>
-      <br />
-      <ShellLine>Apply these changes? [y/N]: y</ShellLine>
-      <ShellLine>Successfully deleted object <Yellow>deployments/anemos-hello-world</Yellow>, namespace: <Yellow>default</Yellow></ShellLine>
-      <ShellLine>Successfully deleted object <Yellow>services/anemos-hello-world</Yellow>, namespace: <Yellow>default</Yellow></ShellLine>
+      <LogInfo time='17:02:41.156'>Deleting objects for apply set anemos-hello-world:</LogInfo>
+      <LogInfo time='17:02:41.157'>NAMESPACE  RESOURCE     NAME</LogInfo>
+      <LogInfo time='17:02:41.157'><Red>default    deployments  anemos-hello-world</Red></LogInfo>
+      <LogInfo time='17:02:41.157'><Red>default    services     anemos-hello-world</Red></LogInfo>
+      <LogInfo time='17:02:41.157'>Apply these changes? [y/N]: y</LogInfo>
+      <LogInfo time='17:02:46.346'>Successfully deleted object <Red>deployments/anemos-hello-world</Red>, namespace: <Red>default</Red></LogInfo>
+      <LogInfo time='17:02:46.349'>Successfully deleted object <Red>services/anemos-hello-world</Red>, namespace: <Red>default</Red></LogInfo>
     </>
   );
 }

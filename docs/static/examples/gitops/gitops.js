@@ -2,7 +2,7 @@
 const anemos = require('@ohayocorp/anemos');
 const helloWorld = require("http://localhost:3000/examples/hello-world.js");
 
-const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
+const builder = new anemos.Builder();
 
 helloWorld.add(builder, {
   ingress: {

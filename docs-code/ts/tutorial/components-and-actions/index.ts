@@ -1,7 +1,7 @@
 import * as anemos from "@ohayocorp/anemos";
 import { Component } from "./component";
 
-const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
+const builder = new anemos.Builder();
 
 builder.addComponent(new Component());
 

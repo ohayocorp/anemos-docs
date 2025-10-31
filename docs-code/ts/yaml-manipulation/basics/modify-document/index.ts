@@ -1,6 +1,6 @@
 import * as anemos from "@ohayocorp/anemos";
 
-const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
+const builder = new anemos.Builder();
 
 const document = new anemos.Document("modified.yaml");
 

@@ -1,6 +1,6 @@
 # Class: DocumentGroup
 
-Defined in: documentGroup.d.ts:9
+Defined in: documentGroup.d.ts:10
 
 Container for multiple [Document](Document.md) instances. It can also contain multiple
 [AdditionalFile](AdditionalFile.md) objects that generates additional files beside the documents.
@@ -13,7 +13,7 @@ Container for multiple [Document](Document.md) instances. It can also contain mu
 new DocumentGroup(path): DocumentGroup;
 ```
 
-Defined in: documentGroup.d.ts:10
+Defined in: documentGroup.d.ts:11
 
 #### Parameters
 
@@ -29,9 +29,11 @@ Defined in: documentGroup.d.ts:10
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="additionalfiles"></a> `additionalFiles` | [`AdditionalFile`](AdditionalFile.md)[] | Additional files in this group. Don't modify this array directly. Use [DocumentGroup.addAdditionalFile](#addadditionalfile) instead. | documentGroup.d.ts:22 |
-| <a id="documents"></a> `documents` | [`Document`](Document.md)[] | Documents in this group. Don't modify this array directly. Use [DocumentGroup.addDocument](#adddocument) and [DocumentGroup.removeDocument](#removedocument) instead. | documentGroup.d.ts:19 |
-| <a id="path"></a> `path` | `string` | The path of the document group. | documentGroup.d.ts:13 |
+| <a id="additionalfiles"></a> `additionalFiles` | [`AdditionalFile`](AdditionalFile.md)[] | Additional files in this group. Don't modify this array directly. Use [DocumentGroup.addAdditionalFile](#addadditionalfile) instead. | documentGroup.d.ts:23 |
+| <a id="applyprovisioner"></a> `applyProvisioner?` | [`Provisioner`](Provisioner.md) | The provisioner that applies the documents in this group. | documentGroup.d.ts:26 |
+| <a id="documents"></a> `documents` | [`Document`](Document.md)[] | Documents in this group. Don't modify this array directly. Use [DocumentGroup.addDocument](#adddocument) and [DocumentGroup.removeDocument](#removedocument) instead. | documentGroup.d.ts:20 |
+| <a id="path"></a> `path` | `string` | The path of the document group. | documentGroup.d.ts:14 |
+| <a id="waitprovisioner"></a> `waitProvisioner?` | [`Provisioner`](Provisioner.md) | The provisioner that waits for the documents in this group to be ready. | documentGroup.d.ts:29 |
 
 ## Methods
 
@@ -41,7 +43,7 @@ Defined in: documentGroup.d.ts:10
 addAdditionalFile(additionalFile): void;
 ```
 
-Defined in: documentGroup.d.ts:28
+Defined in: documentGroup.d.ts:35
 
 Adds the given additional file to this group.
 
@@ -63,7 +65,7 @@ Adds the given additional file to this group.
 addDocument(document): void;
 ```
 
-Defined in: documentGroup.d.ts:25
+Defined in: documentGroup.d.ts:32
 
 Adds the given document to this group and sets its group field to this group.
 
@@ -85,7 +87,7 @@ Adds the given document to this group and sets its group field to this group.
 fixNameClashes(): void;
 ```
 
-Defined in: documentGroup.d.ts:67
+Defined in: documentGroup.d.ts:80
 
 Fixes duplicate document file paths by adding an index suffix to the end the paths. Sorts the documents
 by their apiVersion, kind, namespace, and name to ensure consistent naming.
@@ -104,7 +106,7 @@ a single file.
 getComponent(): Component;
 ```
 
-Defined in: documentGroup.d.ts:34
+Defined in: documentGroup.d.ts:41
 
 Returns the component that created this document group. Component is set when
 the document group is added to the builder context.
@@ -123,7 +125,7 @@ the document group is added to the builder context.
 getDocument(path): Document;
 ```
 
-Defined in: documentGroup.d.ts:37
+Defined in: documentGroup.d.ts:44
 
 Returns the first document that has the given path.
 
@@ -143,7 +145,7 @@ Returns the first document that has the given path.
 getDocument(filter): Document;
 ```
 
-Defined in: documentGroup.d.ts:40
+Defined in: documentGroup.d.ts:47
 
 Returns the first document that satisfies the given predicate.
 
@@ -165,7 +167,7 @@ Returns the first document that satisfies the given predicate.
 moveTo(group): void;
 ```
 
-Defined in: documentGroup.d.ts:46
+Defined in: documentGroup.d.ts:53
 
 Removes all documents and additional files from this group and adds them to the given group.
 
@@ -181,13 +183,57 @@ Removes all documents and additional files from this group and adds them to the 
 
 ***
 
+### provisionAfter()
+
+```ts
+provisionAfter(other): void;
+```
+
+Defined in: documentGroup.d.ts:62
+
+Provisions the documents in this group after the documents in the given group.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `other` | `DocumentGroup` |
+
+#### Returns
+
+`void`
+
+***
+
+### provisionBefore()
+
+```ts
+provisionBefore(other): void;
+```
+
+Defined in: documentGroup.d.ts:65
+
+Provisions the documents in this group before the documents in the given group.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `other` | `DocumentGroup` |
+
+#### Returns
+
+`void`
+
+***
+
 ### removeAdditionalFile()
 
 ```ts
 removeAdditionalFile(additionalFile): void;
 ```
 
-Defined in: documentGroup.d.ts:52
+Defined in: documentGroup.d.ts:59
 
 Removes the given additional file from this group.
 
@@ -209,7 +255,7 @@ Removes the given additional file from this group.
 removeDocument(document): void;
 ```
 
-Defined in: documentGroup.d.ts:49
+Defined in: documentGroup.d.ts:56
 
 Removes the given document from this group and sets its group field to null.
 
@@ -231,7 +277,7 @@ Removes the given document from this group and sets its group field to null.
 setNamespaces(context, namespace): void;
 ```
 
-Defined in: documentGroup.d.ts:59
+Defined in: documentGroup.d.ts:72
 
 Sets the namespace of documents that are namespaced (e.g. Pod, Job, ...) to the given namespace.
 This is useful for documents that are generated by Helm charts where the namespace is not set
@@ -256,7 +302,7 @@ correctly.
 sortedDocuments(): Document[];
 ```
 
-Defined in: documentGroup.d.ts:43
+Defined in: documentGroup.d.ts:50
 
 Returns the documents in this group sorted by their path.
 

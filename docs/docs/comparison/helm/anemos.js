@@ -1,9 +1,9 @@
 // Compute if the server serviceaccount is enabled.
-function serverServiceAccountEnabled(): boolean {
+function serverServiceAccountEnabled() {
     return options.server.serviceAccount.create && (options.server.enabled || options.global.enabled);
 }
 
-function addServiceAccount(context: anemos.BuildContext): void {
+function addServiceAccount(context) {
     if (!serverServiceAccountEnabled()) {
         return;
     }

@@ -1,6 +1,6 @@
 # Class: Action
 
-Defined in: component.d.ts:4
+Defined in: component.d.ts:5
 
 ## Constructors
 
@@ -18,5 +18,5 @@ new Action(): Action;
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="callback"></a> `callback` | (`context`) => `void` | The callback function to be executed for this action. | component.d.ts:13 |
-| <a id="step"></a> `step` | [`Step`](Step.md) | The step during which this action will be executed. | component.d.ts:8 |
+| <a id="callback"></a> `callback` | (`context`) => `void` | The callback function to be executed for this action. | component.d.ts:14 |
+| <a id="step"></a> `step` | [`Step`](Step.md) | The step during which this action will be executed. | component.d.ts:9 |

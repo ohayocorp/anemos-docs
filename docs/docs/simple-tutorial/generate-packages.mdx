@@ -7,6 +7,7 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
 import PackageJs from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-packages/package.js';
+import IndexJs from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-packages/index.js';
 
 # Generating Packages
 
@@ -14,15 +15,15 @@ Simplest way to generate a package with Anemos is to define a function that take
 options object in a JavaScript file. This function can then be used to generate Kubernetes manifests. It is
 also possible to create an NPM package with multiple files, but this is not the focus of this tutorial.
 
-Let's create a file named `package.js` with the following content:
+Let's create a file named `my-package.js` with the following content:
 
-<CodeBlock language="javascript" title="package.js" showLineNumbers>
+<CodeBlock language="javascript" title="my-package.js" showLineNumbers>
     {PackageJs}
 </CodeBlock>
 
 ## Explanation
 
-<CodeBlock language="javascript" title="index.js" showLineNumbers>
+<CodeBlock language="javascript" title="my-package.js" showLineNumbers>
     {PackageJs.split('\n').slice(0, 1).join('\n')}
 </CodeBlock>
 
@@ -37,29 +38,31 @@ with `anemos apply` command.
 Users may or may not provide an `options` object or the values in it. We set default values for the
 options that users do not provide.
 
-<CodeBlock language="javascript" title="index.js" showLineNumbers={8}>
-    {PackageJs.split('\n').slice(7, 25).join('\n').replace('    name,', '//highlight-next-line\n    name,')}
+<CodeBlock language="javascript" title="my-package.js" showLineNumbers={8}>
+    {PackageJs.split('\n').slice(7, 26).join('\n').replace('    name,', '//highlight-next-line\n    name,')}
 </CodeBlock>
 
-This code snippet is the same as the one we used in the previous section. The only difference is that we
-pass the `name` as the first argument to the `addDocument` method. This is the name of the document group
-that the document will belong to.
+This code snippet is similar to the one we used in the previous section. The only difference is that we
+pass the `name` as the `documentGroup` parameter to the `addDocument` method, we set the `path` parameter to the desired file name, and we pass the manifest definition as the `content` parameter.
 
 Document groups are used to organize documents. Documents in a group will be written into a folder
 with the same name as the group. Documents in the same group will also be applied together, and they
 will be deleted together when the package is removed.
 
-<CodeBlock language="javascript" title="index.js" showLineNumbers={27}>
-    {PackageJs.split('\n').slice(26, 48).join('\n')}
-</CodeBlock>
+Default file path of a document is its kind in lowercase concatenated with a hyphen and its metadata name. Here we override the default path to `pod.yaml` since this is the only pod in the package.
 
-In this code snippet, we define a Service manifest. Instead of using a YAML string, we use an object
-to define the Service. The object will be converted to a YAML string by Anemos. Using this
-approach, you can take advantage of JavaScript's features, such as functions and classes, to
-dynamically generate your Kubernetes manifests.
-
-<CodeBlock language="javascript" title="index.js" showLineNumbers={50}>
-    {PackageJs.split('\n').slice(49, 52).join('\n')}
+<CodeBlock language="javascript" title="my-package.js" showLineNumbers={50}>
+    {PackageJs.split('\n').slice(28, 31).join('\n')}
 </CodeBlock>
 
 Lastly, we export the `add` function so that it can be used by users and Anemos.
+
+## Using the Package
+
+To use the package we just created, we can create another JavaScript file named `index.js` with the following content:
+
+<CodeBlock language="javascript" title="index.js">
+    {IndexJs}
+</CodeBlock>
+
+This code imports the Anemos library and our package, creates a `Builder` instance, adds our package to the builder with custom options, and finally builds the manifests.

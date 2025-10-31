@@ -1,6 +1,6 @@
 const anemos = require("@ohayocorp/anemos");
 
-const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
+const builder = new anemos.Builder();
 
 // You can also use a local file path instead of a URL such as: ./path/to/helloworld-0.2.1.tgz
 builder.addHelmChart(

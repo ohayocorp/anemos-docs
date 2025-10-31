@@ -41,6 +41,17 @@ const typedocSidebar = {
                   label: "Options"
                 }
               ]
+            },
+            {
+              type: "category",
+              label: "Variables",
+              items: [
+                {
+                  type: "doc",
+                  id: "api/variables/collectCRDs.componentType",
+                  label: "componentType"
+                }
+              ]
             }
           ],
           link: {
@@ -62,11 +73,54 @@ const typedocSidebar = {
                   label: "Options"
                 }
               ]
+            },
+            {
+              type: "category",
+              label: "Variables",
+              items: [
+                {
+                  type: "doc",
+                  id: "api/variables/collectNamespaces.componentType",
+                  label: "componentType"
+                }
+              ]
             }
           ],
           link: {
             type: "doc",
             id: "api/modules/collectNamespaces"
+          }
+        },
+        {
+          type: "category",
+          label: "createReferencedNamespaces",
+          items: [
+            {
+              type: "category",
+              label: "Classes",
+              items: [
+                {
+                  type: "doc",
+                  id: "api/classes/createReferencedNamespaces.Options",
+                  label: "Options"
+                }
+              ]
+            },
+            {
+              type: "category",
+              label: "Variables",
+              items: [
+                {
+                  type: "doc",
+                  id: "api/variables/createReferencedNamespaces.componentType",
+                  label: "componentType"
+                }
+              ]
+            }
+          ],
+          link: {
+            type: "doc",
+            id: "api/modules/createReferencedNamespaces"
           }
         },
         {
@@ -183,6 +237,11 @@ const typedocSidebar = {
                   type: "doc",
                   id: "api/variables/steps.sanitize",
                   label: "sanitize"
+                },
+                {
+                  type: "doc",
+                  id: "api/variables/steps.specifyProvisionerDependencies",
+                  label: "specifyProvisionerDependencies"
                 }
               ]
             }
@@ -231,6 +290,11 @@ const typedocSidebar = {
         },
         {
           type: "doc",
+          id: "api/enums/ProvisionerType",
+          label: "ProvisionerType"
+        },
+        {
+          type: "doc",
           id: "api/enums/YamlStyle",
           label: "YamlStyle"
         }
@@ -244,6 +308,11 @@ const typedocSidebar = {
           type: "doc",
           id: "api/classes/Action",
           label: "Action"
+        },
+        {
+          type: "doc",
+          id: "api/classes/AddDocumentOptions",
+          label: "AddDocumentOptions"
         },
         {
           type: "doc",
@@ -324,6 +393,11 @@ const typedocSidebar = {
           type: "doc",
           id: "api/classes/OutputConfiguration",
           label: "OutputConfiguration"
+        },
+        {
+          type: "doc",
+          id: "api/classes/Provisioner",
+          label: "Provisioner"
         },
         {
           type: "doc",

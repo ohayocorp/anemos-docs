@@ -46,13 +46,13 @@ how to use Anemos to generate Kubernetes manifests. Let's take a look at the cod
 <Tabs groupId='language'>
   <TabItem value="typescript" label="TypeScript">
     ```typescript title="index.ts" showLineNumbers=3
-    const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
+    const builder = new anemos.Builder();
     ```
   </TabItem>
 
   <TabItem value="javascript" label="JavaScript">
     ```javascript title="index.js" showLineNumbers=3
-    const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
+    const builder = new anemos.Builder();
     ```
   </TabItem>
 </Tabs>

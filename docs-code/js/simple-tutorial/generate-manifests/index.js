@@ -1,10 +1,8 @@
 const anemos = require("@ohayocorp/anemos");
 
-const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
+const builder = new anemos.Builder();
 
-builder.addDocument(
-  `pod.yaml`,
-  `
+builder.addDocument(`
   apiVersion: v1
   kind: Pod
   metadata:

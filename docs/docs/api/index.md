@@ -5,6 +5,7 @@
 - [apply](modules/apply.md)
 - [collectCRDs](modules/collectCRDs.md)
 - [collectNamespaces](modules/collectNamespaces.md)
+- [createReferencedNamespaces](modules/createReferencedNamespaces.md)
 - [deleteOutputDirectory](modules/deleteOutputDirectory.md)
 - [file](modules/file.md)
 - [steps](modules/steps.md)
@@ -14,11 +15,13 @@
 
 - [EnvironmentType](enums/EnvironmentType.md)
 - [KubernetesDistribution](enums/KubernetesDistribution.md)
+- [ProvisionerType](enums/ProvisionerType.md)
 - [YamlStyle](enums/YamlStyle.md)
 
 ## Classes
 
 - [Action](classes/Action.md)
+- [AddDocumentOptions](classes/AddDocumentOptions.md)
 - [AdditionalFile](classes/AdditionalFile.md)
 - [BuildContext](classes/BuildContext.md)
 - [Builder](classes/Builder.md)
@@ -35,6 +38,7 @@
 - [LabelNodes](classes/LabelNodes.md)
 - [Mapping](classes/Mapping.md)
 - [OutputConfiguration](classes/OutputConfiguration.md)
+- [Provisioner](classes/Provisioner.md)
 - [Scalar](classes/Scalar.md)
 - [Sequence](classes/Sequence.md)
 - [Step](classes/Step.md)

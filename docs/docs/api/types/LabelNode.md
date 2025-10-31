@@ -4,7 +4,7 @@
 type LabelNode = (document) => Mapping | null;
 ```
 
-Defined in: documentExtensions.d.ts:273
+Defined in: documentExtensions.d.ts:276
 
 LabelNode is a function that takes a Document and ensures a Mapping for labels in the document.
 It returns null if the labels are not available for the document. This is used to retrieve the

@@ -1,10 +1,8 @@
 const anemos = require("@ohayocorp/anemos");
 
-const builder = new anemos.Builder("1.31", anemos.KubernetesDistribution.Minikube, anemos.EnvironmentType.Development);
+const builder = new anemos.Builder();
 
-builder.addDocument(
-  `pod.yaml`,
-  `
+builder.addDocument(`
   apiVersion: v1
   kind: Pod
   metadata:
@@ -22,7 +20,7 @@ builder.addDocument(
 builder.onModify((context) => {
   // Add a label to the Pod.
   context
-    .getDocument("pod.yaml")
+    .getDocument("pod-example-app.yaml")
     .setLabel("app", "example-app");
 });
 // highlight-end

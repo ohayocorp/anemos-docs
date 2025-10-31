@@ -1,5 +1,10 @@
 $thisScriptDirectory=$PSScriptRoot
 
+# Remove all type definitions recursively if they exist
+if (Test-Path -Path docs\.anemos) {
+    Remove-Item -Path docs\.anemos -Recurse -Force
+}
+
 anemos.exe declarations docs\.anemos
 
 Push-Location "${thisScriptDirectory}\docs-code\js"
