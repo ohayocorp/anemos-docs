@@ -1,22 +1,14 @@
 # Class: Options
 
-Defined in: collectCRDs.d.ts:18
+Defined in: components/collectCRDs.d.ts:5
 
 ## Constructors
 
 ### Constructor
 
 ```ts
-new Options(documentGroupPath?): Options;
+new Options(): Options;
 ```
-
-Defined in: collectCRDs.d.ts:19
-
-#### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `documentGroupPath?` | `string` |
 
 #### Returns
 
@@ -26,4 +18,4 @@ Defined in: collectCRDs.d.ts:19
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="documentgrouppath"></a> `documentGroupPath?` | `string` | Path of the document group in which CRDs will be collected. Default value is 'crds'. | collectCRDs.d.ts:22 |
+| <a id="documentgroup"></a> `documentGroup?` | `string` | Path of the document group in which CRDs will be collected. Default value is 'crds'. | components/collectCRDs.d.ts:7 |

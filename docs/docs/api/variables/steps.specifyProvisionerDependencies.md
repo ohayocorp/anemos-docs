@@ -4,6 +4,6 @@
 const specifyProvisionerDependencies: Step;
 ```
 
-Defined in: step.d.ts:40
+Defined in: steps.d.ts:42
 
 Specify provisioner dependencies in this step.

@@ -7,11 +7,8 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
 import LibIndexJs from '!!raw-loader!{{CODE_PATH}}/js/tutorial/generating-package/lib/index.js';
-import LibIndexTs from '!!raw-loader!{{CODE_PATH}}/ts/tutorial/generating-package/lib/index.ts';
 import TestIndexJs from '!!raw-loader!{{CODE_PATH}}/js/tutorial/generating-package/index.js';
-import TestIndexTs from '!!raw-loader!{{CODE_PATH}}/ts/tutorial/generating-package/index.ts';
 import BasicIndexJs from '!!raw-loader!{{CODE_PATH}}/js/tutorial/generating-package/test/basic/index.js';
-import BasicIndexTs from '!!raw-loader!{{CODE_PATH}}/ts/tutorial/generating-package/test/basic/index.ts';
 
 # Generating a Package
 
@@ -24,12 +21,6 @@ have the necessary structure and files to be published as a package.
 To create a package project, run the following command:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```bash
-    anemos new example-package --language typescript --project-type package
-    ```
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```bash
     anemos new example-package --project-type package
@@ -41,8 +32,8 @@ Structure of the package project is a bit different from the application project
 the package project is designed to be reusable and shareable, while the application project is meant to be
 used for generating output files for a specific use case.
 
-Package projects also have slightly different values in the `package.json` and `tsconfig.json` (if you use TypeScript)
-files to match the package project structure. We will not go into details about these files as the changes are minimal.
+Package projects also have slightly different values in the `package.json` to match the package project
+structure. We will not go into details about these files as the changes are minimal.
 
 ## Library Code (`lib` directory)
 
@@ -59,12 +50,6 @@ given `Builder`. The `Component` class will not be exported, as it is not part o
 by the package.
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="lib/index.ts" showLineNumbers>
-        {LibIndexTs}
-    </CodeBlock>
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="lib/index.js" showLineNumbers>
         {LibIndexJs}
@@ -82,12 +67,6 @@ Inside the `test` directory, you will find the index file that serves as the ent
 the test cases. It imports all the test cases and runs them one by one.
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="test/index.ts" showLineNumbers>
-        {TestIndexTs}
-    </CodeBlock>
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="test/index.js" showLineNumbers>
         {TestIndexJs}
@@ -99,22 +78,6 @@ Each test case is defined as a separate module inside its own directory. Anemos
 creates a simple test case under the `basic` directory.
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="test/basic/index.ts" showLineNumbers>
-        {BasicIndexTs}
-    </CodeBlock>
-
-    Contents of the `test/basic/index.ts` file is be similar to the `index.ts` file in the application project.
-    The only notable difference is the `require` statements at the top of the file. Instead of importing
-    the `Component` and `Options` classes from the `component.ts` and `options.ts` files, the package's public
-    API is imported from the `lib` directory.
-
-    When you run the build command, it will compile the TypeScript files in the `lib` directory
-    and generate the corresponding JavaScript files in the `dist` directory. The `test/index.ts` file
-    will also be compiled and executed. The output files will be generated in the `dist/test/output/basic` directory.
-    You can check them to verify that the package works as expected.
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="test/basic/index.js" showLineNumbers>
         {BasicIndexJs}

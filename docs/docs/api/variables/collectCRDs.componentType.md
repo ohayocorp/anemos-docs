@@ -1,7 +1,7 @@
 # Variable: componentType
 
 ```ts
-const componentType: string;
+const componentType: "collect-crds" = "collect-crds";
 ```
 
-Defined in: collectCRDs.d.ts:16
+Defined in: components/collectCRDs.d.ts:4

@@ -1,7 +1,7 @@
 # Variable: componentType
 
 ```ts
-const componentType: string;
+const componentType: "collect-namespaces" = "collect-namespaces";
 ```
 
-Defined in: collectNamespaces.d.ts:16
+Defined in: components/collectNamespaces.d.ts:4

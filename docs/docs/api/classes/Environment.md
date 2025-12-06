@@ -1,6 +1,6 @@
 # Class: Environment
 
-Defined in: builderOptions.d.ts:17
+Defined in: builderOptions.d.ts:19
 
 Contains information about the target environment.
 
@@ -12,14 +12,14 @@ Contains information about the target environment.
 new Environment(name, type): Environment;
 ```
 
-Defined in: builderOptions.d.ts:18
+Defined in: builderOptions.d.ts:20
 
 #### Parameters
 
 | Parameter | Type |
 | ------ | ------ |
 | `name` | `string` |
-| `type` | [`EnvironmentType`](../enums/EnvironmentType.md) |
+| `type` | `string` |
 
 #### Returns
 
@@ -29,5 +29,5 @@ Defined in: builderOptions.d.ts:18
 
 | Property | Type | Defined in |
 | ------ | ------ | ------ |
-| <a id="name"></a> `name` | `string` | builderOptions.d.ts:20 |
-| <a id="type"></a> `type` | [`EnvironmentType`](../enums/EnvironmentType.md) | builderOptions.d.ts:21 |
+| <a id="name"></a> `name` | `string` | builderOptions.d.ts:22 |
+| <a id="type"></a> `type` | `string` | builderOptions.d.ts:23 |

@@ -6,7 +6,7 @@ sidebar_position: 1
 # Overview
 
 Anemos is a single binary CLI tool designed to simplify the management
-of Kubernetes packages. It lets you manage manifests and other resources using JavaScript or TypeScript,
+of Kubernetes packages. It lets you manage manifests and other resources using JavaScript,
 providing a powerful and flexible way to define your infrastructure as code.
 
 Other tools typically focus on management of a single package. But, Kubernetes

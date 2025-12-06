@@ -1,7 +1,7 @@
 # Variable: componentType
 
 ```ts
-const componentType: string;
+const componentType: "create-referenced-namespaces" = "create-referenced-namespaces";
 ```
 
-Defined in: createReferencedNamespaces.d.ts:14
+Defined in: components/createReferencedNamespaces.d.ts:4

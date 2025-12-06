@@ -6,7 +6,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
-import IndexTs from '!!raw-loader!{{CODE_PATH}}/ts/tutorial/package-management/index.ts';
 import IndexJs from '!!raw-loader!{{CODE_PATH}}/js/tutorial/package-management/index.js';
 
 # Package Management
@@ -64,12 +63,6 @@ Now, let's integrate the newly added library into our project. Update the main s
 according to the highlighted changes:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="index.ts" showLineNumbers>
-        {IndexTs}
-    </CodeBlock>
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="index.js" showLineNumbers>
         {IndexJs}
@@ -81,12 +74,6 @@ Now, this library will contribute to the manifest generation process. To see
 the manifests it generates, rebuild the project:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```bash
-    anemos build --tsc . dist/index.js
-    ```
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```bash
     anemos build index.js

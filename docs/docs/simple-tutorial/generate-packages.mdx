@@ -6,8 +6,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
-import PackageJs from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-packages/package.js';
+import PackageJs from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-packages/my-package.js';
 import IndexJs from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-packages/index.js';
+import PodYaml from '!!raw-loader!{{CODE_PATH}}/js/simple-tutorial/generate-packages/output/manifests/custom-app/pod.yaml';
 
 # Generating Packages
 
@@ -61,8 +62,18 @@ Lastly, we export the `add` function so that it can be used by users and Anemos.
 
 To use the package we just created, we can create another JavaScript file named `index.js` with the following content:
 
-<CodeBlock language="javascript" title="index.js">
-    {IndexJs}
-</CodeBlock>
+<Tabs>
+  <TabItem value="index.js">
+    <CodeBlock language="javascript" showLineNumbers>
+      {IndexJs}
+    </CodeBlock>
+  </TabItem>
+
+  <TabItem value="output/manifests/custom-app/pod.yaml">
+    <CodeBlock language="yaml" showLineNumbers>
+      {PodYaml}
+    </CodeBlock>
+  </TabItem>
+</Tabs>
 
 This code imports the Anemos library and our package, creates a `Builder` instance, adds our package to the builder with custom options, and finally builds the manifests.

@@ -1,4 +1,5 @@
 {
   "plugin": ["typedoc-plugin-markdown", "typedoc-docusaurus-theme"],
-  "entryPoints": [".anemos/index.d.ts"]
+  "entryPoints": [".anemos/index.d.ts"],
+  "exclude": [".anemos/k8s/**/*"],
 }

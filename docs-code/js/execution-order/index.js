@@ -64,12 +64,12 @@ class SetNodeNameComponent extends anemos.Component {
       }
 
       // If the document does not have the label "app: app1", skip it.
-      if (document.getLabel("app") !== "app1") {
+      if (document.metadata?.labels?.app !== "app1") {
         continue;
       }
 
       // Run app1 pods on node "worker-1".
-      document.ensureWorkloadSpec().set("nodeName", "worker-1");
+      document.ensureWorkloadSpec().nodeName = "worker-1";
     }
   };
 }

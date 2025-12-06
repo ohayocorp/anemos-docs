@@ -1,10 +1,10 @@
 # Function: parseDocument()
 
 ```ts
-function parseDocument(path, text): Document;
+function parseDocument(yaml): Document;
 ```
 
-Defined in: parsing.d.ts:6
+Defined in: parsing.d.ts:7
 
 Parses the given text as a [Document](../classes/Document.md).
 
@@ -12,8 +12,7 @@ Parses the given text as a [Document](../classes/Document.md).
 
 | Parameter | Type |
 | ------ | ------ |
-| `path` | `string` |
-| `text` | `string` |
+| `yaml` | `string` |
 
 ## Returns
 

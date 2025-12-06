@@ -17,7 +17,7 @@ builder.addDocument(`
   `);
 
 // highlight-start
-builder.onModify((context) => {
+builder.onModify(context => {
   // Add a label to the Pod.
   context
     .getDocument("pod-example-app.yaml")

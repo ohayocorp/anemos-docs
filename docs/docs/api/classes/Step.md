@@ -1,6 +1,6 @@
 # Class: Step
 
-Defined in: step.d.ts:58
+Defined in: step.d.ts:13
 
 A class that can be used to specify order of things in a flexible manner. This object consists of a
 list of numbers. When two steps are compared, each number in their lists are compared according to their indexes.
@@ -21,7 +21,7 @@ the step (1, 1, 1) is between them.
 new Step(description, numbers): Step;
 ```
 
-Defined in: step.d.ts:59
+Defined in: step.d.ts:14
 
 #### Parameters
 
@@ -38,8 +38,8 @@ Defined in: step.d.ts:59
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="description"></a> `description` | `string` | A description of the step, useful for debugging and logging. | step.d.ts:62 |
-| <a id="numbers"></a> `numbers` | `number`[] | The list of numbers that define the step. | step.d.ts:65 |
+| <a id="description"></a> `description` | `string` | A description of the step, useful for debugging and logging. | step.d.ts:17 |
+| <a id="numbers"></a> `numbers` | `number`[] | The list of numbers that define the step. | step.d.ts:20 |
 
 ## Methods
 
@@ -49,7 +49,7 @@ Defined in: step.d.ts:59
 compareTo(other): number;
 ```
 
-Defined in: step.d.ts:71
+Defined in: step.d.ts:26
 
 Compares this step to another step.
 
@@ -71,7 +71,7 @@ Compares this step to another step.
 equals(other): boolean;
 ```
 
-Defined in: step.d.ts:68
+Defined in: step.d.ts:23
 
 Returns true if the two steps are equal.
 

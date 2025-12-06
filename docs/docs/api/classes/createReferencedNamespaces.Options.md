@@ -1,6 +1,6 @@
 # Class: Options
 
-Defined in: createReferencedNamespaces.d.ts:16
+Defined in: components/createReferencedNamespaces.d.ts:5
 
 ## Constructors
 
@@ -18,4 +18,5 @@ new Options(): Options;
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="predicate"></a> `predicate` | (`namespace`) => `boolean` | A predicate function to filter namespaces. Returns true if the namespace should be included. If not specified, all namespaces except the default Kubernetes namespaces will be included. | createReferencedNamespaces.d.ts:21 |
+| <a id="documentgroup"></a> `documentGroup?` | `string` | Path of the document group in which created namespaces will belong. Default value is 'namespaces'. | components/createReferencedNamespaces.d.ts:7 |
+| <a id="predicate"></a> `predicate?` | (`namespace`) => `boolean` | A predicate function to filter namespaces. Returns true if the namespace should be included. If not specified, all namespaces except the default Kubernetes namespaces will be included. | components/createReferencedNamespaces.d.ts:12 |

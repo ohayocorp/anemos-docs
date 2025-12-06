@@ -1,6 +1,6 @@
 # Class: OutputConfiguration
 
-Defined in: builderOptions.d.ts:64
+Defined in: builderOptions.d.ts:40
 
 Specifies the output directory structure.
 
@@ -20,4 +20,4 @@ new OutputConfiguration(): OutputConfiguration;
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="outputpath"></a> `outputPath?` | `string` | Default value is "output" under the current working directory. | builderOptions.d.ts:66 |
+| <a id="outputpath"></a> `outputPath?` | `string` | Default value is "output" under the current working directory. | builderOptions.d.ts:42 |

@@ -9,11 +9,8 @@ import Mermaid from '@theme/Mermaid';
 
 import Diagram from '!!raw-loader!/docs/steps-mermaid.txt';
 import ComponentEmptyJs from '!!raw-loader!{{CODE_PATH}}/js/tutorial/components-and-actions/componentEmpty/index.js';
-import ComponentEmptyTs from '!!raw-loader!{{CODE_PATH}}/ts/tutorial/components-and-actions/componentEmpty/index.ts';
 import ComponentJs from '!!raw-loader!{{CODE_PATH}}/js/tutorial/components-and-actions/component.js';
-import ComponentTs from '!!raw-loader!{{CODE_PATH}}/ts/tutorial/components-and-actions/component.ts';
 import IndexJs from '!!raw-loader!{{CODE_PATH}}/js/tutorial/components-and-actions/index.js';
-import IndexTs from '!!raw-loader!{{CODE_PATH}}/ts/tutorial/components-and-actions/index.ts';
 
 # Components and Actions
 
@@ -50,12 +47,6 @@ actions within its constructor. The `Component` class provides the `addAction` m
 these actions along with their steps. Let's create a new file and define a custom component:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="component.ts" showLineNumbers>
-        {ComponentEmptyTs}
-    </CodeBlock>
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="component.js" showLineNumbers>
         {ComponentEmptyJs}
@@ -81,12 +72,6 @@ Let's add an action to our custom component. We will move the code from the prev
 the Kubernetes manifests into the action. This will allow us to generate the documents when the action is executed.
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="component.ts" showLineNumbers>
-        {ComponentTs}
-    </CodeBlock>
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="component.js" showLineNumbers>
         {ComponentJs}
@@ -101,18 +86,6 @@ The `builder.addDocument` method that was used in the previous sections is a sho
 that adds the given document to the context during the `steps.generateResources` step. It is similar to the following code block:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```typescript showLineNumbers
-    const component = new anemos.Component();
-
-    component.addAction(anemos.steps.generateResources, (context: anemos.BuildContext) => {
-        context.addDocument(document);
-    });
-
-    builder.addComponent(component);
-    ```
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```javascript showLineNumbers
     const component = new anemos.Component();
@@ -132,12 +105,6 @@ the Kubernetes manifests in the main script with the following code that creates
 and adds it to the builder:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="index.ts" showLineNumbers>
-        {IndexTs}
-    </CodeBlock>
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="index.js" showLineNumbers>
         {IndexJs}
@@ -148,12 +115,6 @@ and adds it to the builder:
 Now, run Anemos build to generate the manifests and see that the output is the same as before:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```bash
-    anemos build --tsc . dist/index.js
-    ```
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```bash
     anemos build index.js

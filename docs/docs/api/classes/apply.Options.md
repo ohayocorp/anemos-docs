@@ -1,6 +1,6 @@
 # Class: Options
 
-Defined in: apply.d.ts:17
+Defined in: apply.d.ts:15
 
 ## Constructors
 
@@ -10,7 +10,7 @@ Defined in: apply.d.ts:17
 new Options(): Options;
 ```
 
-Defined in: apply.d.ts:18
+Defined in: apply.d.ts:16
 
 #### Returns
 
@@ -20,6 +20,6 @@ Defined in: apply.d.ts:18
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="documentgroups"></a> `documentGroups?` | `string`[] | Regex patterns of document group paths to include. If not set, all groups will be included. | apply.d.ts:21 |
-| <a id="forceconflicts"></a> `forceConflicts?` | `boolean` | Forcefully apply changes even if there are conflicts on server side apply. | apply.d.ts:27 |
-| <a id="skipconfirmation"></a> `skipConfirmation?` | `boolean` | Skip confirmation prompt and apply changes directly. | apply.d.ts:24 |
+| <a id="documentgroups"></a> `documentGroups?` | `string`[] | Regex patterns of document group paths to include. If not set, all groups will be included. | apply.d.ts:19 |
+| <a id="forceconflicts"></a> `forceConflicts?` | `boolean` | Forcefully apply changes even if there are conflicts on server side apply. | apply.d.ts:25 |
+| <a id="skipconfirmation"></a> `skipConfirmation?` | `boolean` | Skip confirmation prompt and apply changes directly. | apply.d.ts:22 |

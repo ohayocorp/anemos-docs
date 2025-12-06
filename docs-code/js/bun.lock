@@ -4,7 +4,7 @@
     "": {
       "name": "code",
       "dependencies": {
-        "@ohayocorp/anemos-hello-world": "^1.0.2",
+        "@ohayocorp/anemos-hello-world": "^1.0.3",
       },
       "devDependencies": {
         "@ohayocorp/anemos": "workspace:.anemos/types",
@@ -18,6 +18,6 @@
   "packages": {
     "@ohayocorp/anemos": ["@ohayocorp/anemos@workspace:.anemos/types"],
 
-    "@ohayocorp/anemos-hello-world": ["@ohayocorp/anemos-hello-world@1.0.2", "", {}, "sha512-jOhFSfhzFugdWPIiC+tK9ksgOAy7hu4HrXSzTNm3n6yWj6P7/moID4rqMC0TrSePCLmw89CbIalWe20epYx9sw=="],
+    "@ohayocorp/anemos-hello-world": ["@ohayocorp/anemos-hello-world@1.0.3", "", {}, "sha512-pRp9duZ024mBb6712RhAK33Rz6TN+eNA2E7mnQMZW7L0P8/l7pw0Rin2a7EMuMEkk67hPnKBxk7dkL0EJIX+XA=="],
   }
 }

@@ -1,6 +1,6 @@
 # Class: KubernetesCluster
 
-Defined in: builderOptions.d.ts:38
+Defined in: builderOptions.d.ts:29
 
 Contains information about the target Kubernetes cluster.
 
@@ -15,14 +15,14 @@ new KubernetesCluster(
    additionalResources?): KubernetesCluster;
 ```
 
-Defined in: builderOptions.d.ts:39
+Defined in: builderOptions.d.ts:30
 
 #### Parameters
 
 | Parameter | Type |
 | ------ | ------ |
 | `version` | [`Version`](Version.md) |
-| `distribution` | [`KubernetesDistribution`](../enums/KubernetesDistribution.md) |
+| `distribution` | `string` |
 | `additionalResources?` | [`KubernetesResource`](KubernetesResource.md)[] |
 
 #### Returns
@@ -33,6 +33,6 @@ Defined in: builderOptions.d.ts:39
 
 | Property | Type | Defined in |
 | ------ | ------ | ------ |
-| <a id="additionalresources"></a> `additionalResources?` | [`KubernetesResource`](KubernetesResource.md)[] | builderOptions.d.ts:43 |
-| <a id="distribution"></a> `distribution` | [`KubernetesDistribution`](../enums/KubernetesDistribution.md) | builderOptions.d.ts:41 |
-| <a id="version"></a> `version` | [`Version`](Version.md) | builderOptions.d.ts:42 |
+| <a id="additionalresources"></a> `additionalResources?` | [`KubernetesResource`](KubernetesResource.md)[] | builderOptions.d.ts:34 |
+| <a id="distribution"></a> `distribution` | `string` | builderOptions.d.ts:32 |
+| <a id="version"></a> `version` | [`Version`](Version.md) | builderOptions.d.ts:33 |

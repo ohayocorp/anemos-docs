@@ -7,7 +7,6 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
 import IndexJs from '!!raw-loader!{{CODE_PATH}}/js/tutorial/generating-kubernetes-manifests/index.js';
-import IndexTs from '!!raw-loader!{{CODE_PATH}}/ts/tutorial/generating-kubernetes-manifests/index.ts';
 import DeploymentYaml from '!!raw-loader!{{CODE_PATH}}/js/tutorial/generating-kubernetes-manifests/output/manifests/deployment.yaml';
 import ServiceYaml from '!!raw-loader!{{CODE_PATH}}/js/tutorial/generating-kubernetes-manifests/output/manifests/service.yaml';
 
@@ -22,16 +21,6 @@ Anemos has already created a main script for us, which contains a basic example 
 how to use Anemos to generate Kubernetes manifests. Let's take a look at the code:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```typescript title="index.ts" showLineNumbers=1
-    import * as anemos from "@ohayocorp/anemos";
-    ```
-
-    This line imports the Anemos library using TypeScript's standard `import` syntax. Although
-    imported like any other JavaScript library, the core library is implemented in native code,
-    eliminating the need for dependencies.
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```javascript title="index.js" showLineNumbers=1
     const anemos = require("@ohayocorp/anemos");
@@ -44,12 +33,6 @@ how to use Anemos to generate Kubernetes manifests. Let's take a look at the cod
 </Tabs>
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```typescript title="index.ts" showLineNumbers=3
-    const builder = new anemos.Builder();
-    ```
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```javascript title="index.js" showLineNumbers=3
     const builder = new anemos.Builder();
@@ -64,26 +47,6 @@ generate OpenShift `Route`s instead of `Ingress` definitions if the distribution
 counts based on the environment type.
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```typescript title="index.ts" showLineNumbers=5
-    builder.addDocument(
-        `pod.yaml`,
-        `
-        apiVersion: v1
-        kind: Pod
-        metadata:
-          name: nginx
-          namespace: default
-        spec:
-          containers:
-            - name: nginx
-              image: nginx:latest
-              ports:
-                - containerPort: 80
-        `);
-    ```
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```javascript title="index.js" showLineNumbers=5
     builder.addDocument(
@@ -110,12 +73,6 @@ Nginx Pod manifest using `builder.addDocument()`. This demonstrates a simple mec
 resources. For our application, however, we'll replace this Pod definition with a `Deployment` and a `Service`.
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```typescript title="index.ts" showLineNumbers=21
-    builder.build();
-    ```
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```javascript title="index.js" showLineNumbers=21
     builder.build();
@@ -138,15 +95,6 @@ Let's create a `Deployment` and a `Service` for a sample Nginx application.
 First, define some constants for reuse within our manifests:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```typescript title="index.ts" showLineNumbers=5
-    const name = "example-app";
-    const namespace = "default";
-    const image = "nginx";
-    const replicas = 1;
-    ```
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```javascript title="index.js" showLineNumbers=5
     const name = "example-app";
@@ -160,35 +108,6 @@ First, define some constants for reuse within our manifests:
 Next, add the `Deployment` document using `builder.addDocument()`:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```typescript title="index.ts" showLineNumbers=10
-    builder.addDocument(
-        `deployment.yaml`,
-        `
-        apiVersion: apps/v1
-        kind: Deployment
-        metadata:
-          name: ${name}
-          namespace: ${namespace}
-        spec:
-          replicas: ${replicas}
-          selector:
-            matchLabels:
-              app: ${name}
-          template:
-            metadata:
-              labels:
-                app: ${name}
-            spec:
-              containers:
-                - name: app
-                  image: ${image}
-                  ports:
-                    - containerPort: 80
-        `);
-    ```
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```javascript title="index.js" showLineNumbers=10
     builder.addDocument(
@@ -232,33 +151,6 @@ line before parsing, allowing you to format the YAML for readability within your
 Now, let's add the `Service` document by passing a JavaScript object to `builder.addDocument()`:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```typescript title="index.ts" showLineNumbers=35
-    builder.addDocument(
-        `service.yaml`,
-        {
-            apiVersion: "v1",
-            kind: "Service",
-            metadata: {
-                name: name,
-                namespace: namespace,
-            },
-            spec: {
-                selector: {
-                    app: name
-                },
-                ports: [
-                    {
-                        protocol: "TCP",
-                        port: 80,
-                        targetPort: 80
-                    }
-                ]
-            }
-        });
-    ```
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```javascript title="index.js" showLineNumbers=35
     builder.addDocument(
@@ -305,16 +197,6 @@ automatically update the `Document` instance.
 That's it! To generate the manifests, run the Anemos CLI (or press `Ctrl+F5` in VSCode if you have added the keybinding):
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```bash
-    anemos build --tsc . dist/index.js
-    ```
-
-    This command executes the `dist/index.js` file, which is generated by compiling `index.ts` file, processes the added documents,
-    and writes the resulting `deployment.yaml` and `service.yaml` files to the `output/manifests` directory.
-
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```bash
     anemos build index.js
@@ -328,12 +210,6 @@ That's it! To generate the manifests, run the Anemos CLI (or press `Ctrl+F5` in 
 Below are the complete source files and the generated manifests:
 
 <Tabs groupId='language'>
-<TabItem value="typescript" label="TypeScript">
-    <CodeBlock title="index.ts" language="typescript" showLineNumbers>
-        {IndexTs}
-    </CodeBlock>
-</TabItem>
-
 <TabItem value="javascript" label="JavaScript">
     <CodeBlock title="index.js" language="javascript" showLineNumbers>
         {IndexJs}

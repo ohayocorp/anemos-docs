@@ -15,7 +15,11 @@ builder.addHelmChart(
 
 builder.onModify(context => {
   for (const document of context.getDocumentGroup("hello-world").documents) {
-    document.getLabels().remove("helm.sh/chart");
+    const labels = document.metadata?.labels;
+    if (labels) {
+      delete labels["helm.sh/chart"];
+    }
+
     document.setLabel("example", "value");
   }
 });

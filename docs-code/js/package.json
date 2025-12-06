@@ -9,6 +9,6 @@
     "@ohayocorp/anemos": "workspace:.anemos/types"
   },
   "dependencies": {
-    "@ohayocorp/anemos-hello-world": "^1.0.2"
+    "@ohayocorp/anemos-hello-world": "^1.0.3"
   }
 }

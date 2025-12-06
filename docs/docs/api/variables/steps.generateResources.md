@@ -4,6 +4,6 @@
 const generateResources: Step;
 ```
 
-Defined in: step.d.ts:26
+Defined in: steps.d.ts:28
 
 Use this step to generate documents and additional files.

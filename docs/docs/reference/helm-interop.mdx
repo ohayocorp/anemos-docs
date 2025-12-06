@@ -3,7 +3,6 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
 import IndexJs from '!!raw-loader!{{CODE_PATH}}/js/helm-interop/index.js';
-import IndexTs from '!!raw-loader!{{CODE_PATH}}/ts/helm-interop/index.ts';
 import DeploymentYaml from '!!raw-loader!{{CODE_PATH}}/js/helm-interop/output/manifests/hello-world/deployment.yaml';
 import ServiceYaml from '!!raw-loader!{{CODE_PATH}}/js/helm-interop/output/manifests/hello-world/service.yaml';
 import ServiceAccountYaml from '!!raw-loader!{{CODE_PATH}}/js/helm-interop/output/manifests/hello-world/serviceaccount.yaml';
@@ -26,12 +25,6 @@ Anemos script that generates manifests from a Helm chart, modifies them to remov
 and add an example label.
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="index.ts" showLineNumbers>
-        {IndexTs}
-    </CodeBlock>
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="index.js" showLineNumbers>
         {IndexJs}

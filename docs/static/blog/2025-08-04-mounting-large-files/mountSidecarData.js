@@ -77,7 +77,7 @@ function apply(builder, options) {
     builder.onModify((context) => {
         const workload = context.getDocument(options.documentName);
 
-        workload.getWorkloadSpec().set("shareProcessNamespace", true);
+        workload.getWorkloadSpec().shareProcessNamespace = true;
 
         const mainContainer = getMainContainer(workload, options);
         const dataContainer = getDataContainer(options);

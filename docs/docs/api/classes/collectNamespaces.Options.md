@@ -1,22 +1,14 @@
 # Class: Options
 
-Defined in: collectNamespaces.d.ts:18
+Defined in: components/collectNamespaces.d.ts:5
 
 ## Constructors
 
 ### Constructor
 
 ```ts
-new Options(documentGroupPath?): Options;
+new Options(): Options;
 ```
-
-Defined in: collectNamespaces.d.ts:19
-
-#### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `documentGroupPath?` | `string` |
 
 #### Returns
 
@@ -26,4 +18,4 @@ Defined in: collectNamespaces.d.ts:19
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="documentgrouppath"></a> `documentGroupPath?` | `string` | Path of the document group in which namespaces will be collected. Default value is 'namespaces'. | collectNamespaces.d.ts:22 |
+| <a id="documentgroup"></a> `documentGroup?` | `string` | Path of the document group in which namespaces will be collected. Default value is 'namespaces'. | components/collectNamespaces.d.ts:7 |

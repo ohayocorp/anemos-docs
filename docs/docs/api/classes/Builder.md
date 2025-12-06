@@ -1,6 +1,6 @@
 # Class: Builder
 
-Defined in: builder.d.ts:8
+Defined in: builder.d.ts:11
 
 ## Constructors
 
@@ -10,7 +10,7 @@ Defined in: builder.d.ts:8
 new Builder(): Builder;
 ```
 
-Defined in: builder.d.ts:9
+Defined in: builder.d.ts:12
 
 #### Returns
 
@@ -22,7 +22,7 @@ Defined in: builder.d.ts:9
 new Builder(options): Builder;
 ```
 
-Defined in: builder.d.ts:10
+Defined in: builder.d.ts:13
 
 #### Parameters
 
@@ -43,15 +43,15 @@ new Builder(
    environmentType): Builder;
 ```
 
-Defined in: builder.d.ts:11
+Defined in: builder.d.ts:14
 
 #### Parameters
 
 | Parameter | Type |
 | ------ | ------ |
 | `version` | `string` \| [`Version`](Version.md) |
-| `distribution` | [`KubernetesDistribution`](../enums/KubernetesDistribution.md) |
-| `environmentType` | [`EnvironmentType`](../enums/EnvironmentType.md) |
+| `distribution` | `string` |
+| `environmentType` | `string` |
 
 #### Returns
 
@@ -61,8 +61,8 @@ Defined in: builder.d.ts:11
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="components"></a> `components` | [`Component`](Component.md)[] | All components that will be run by this builder. Don't add to this array directly, use [Builder.addComponent](#addcomponent) instead. | builder.d.ts:16 |
-| <a id="options"></a> `options` | [`BuilderOptions`](BuilderOptions.md) | Common options that are used by the builder components. | builder.d.ts:19 |
+| <a id="components"></a> `components` | [`Component`](Component.md)[] | All components that will be run by this builder. Don't add to this array directly, use [Builder.addComponent](#addcomponent) instead. | builder.d.ts:19 |
+| <a id="options"></a> `options` | [`BuilderOptions`](BuilderOptions.md) | Common options that are used by the builder components. | builder.d.ts:22 |
 
 ## Methods
 
@@ -74,7 +74,7 @@ Defined in: builder.d.ts:11
 addAdditionalFile(additionalFile): void;
 ```
 
-Defined in: builder.d.ts:59
+Defined in: builder.d.ts:76
 
 Adds the given additional file to a [DocumentGroup](DocumentGroup.md) named "" during the [steps.generateResources](../variables/steps.generateResources.md) step.
 
@@ -97,7 +97,7 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 addAdditionalFile(documentGroupPath, additionalFile): void;
 ```
 
-Defined in: builder.d.ts:67
+Defined in: builder.d.ts:84
 
 Adds the given additional file to a [DocumentGroup](DocumentGroup.md) with the given name during the [steps.generateResources](../variables/steps.generateResources.md) step.
 
@@ -123,7 +123,7 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 addComponent(component): void;
 ```
 
-Defined in: builder.d.ts:25
+Defined in: builder.d.ts:28
 
 Adds given component to the list of components.
 
@@ -147,7 +147,31 @@ Adds given component to the list of components.
 addDocument(document): void;
 ```
 
-Defined in: builder.d.ts:43
+Defined in: builder.d.ts:47
+
+Parses the given YAML string as a [Document](Document.md) and adds it to a [DocumentGroup](DocumentGroup.md) named ""
+during the [steps.generateResources](../variables/steps.generateResources.md) step.
+
+Checks for an existing [DocumentGroup](DocumentGroup.md) with the name "" and adds the document to it if it exists.
+Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
+
+##### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `document` | `string` |
+
+##### Returns
+
+`void`
+
+#### Call Signature
+
+```ts
+addDocument(document): void;
+```
+
+Defined in: builder.d.ts:55
 
 Adds the given document to a [DocumentGroup](DocumentGroup.md) named "" during the [steps.generateResources](../variables/steps.generateResources.md) step.
 
@@ -170,7 +194,7 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 addDocument(options): void;
 ```
 
-Defined in: builder.d.ts:51
+Defined in: builder.d.ts:63
 
 Adds a new document using the provided options during the [steps.generateResources](../variables/steps.generateResources.md) step.
 
@@ -181,9 +205,31 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 
 | Parameter | Type |
 | ------ | ------ |
-| `options` | [`AddDocumentOptions`](AddDocumentOptions.md) |
+| `options` | [`NewDocumentOptions`](NewDocumentOptions.md) |
 
 ##### Returns
+
+`void`
+
+***
+
+### addDocumentGroup()
+
+```ts
+addDocumentGroup(documentGroup): void;
+```
+
+Defined in: builder.d.ts:68
+
+Adds the given [DocumentGroup](DocumentGroup.md) during the [steps.generateResources](../variables/steps.generateResources.md) step.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `documentGroup` | [`DocumentGroup`](DocumentGroup.md) |
+
+#### Returns
 
 `void`
 
@@ -223,7 +269,7 @@ Creates a document group from the Helm chart using the given values on
 addProvisionCheckpoint(name): Component;
 ```
 
-Defined in: builder.d.ts:35
+Defined in: builder.d.ts:38
 
 Adds a component that creates a document group with the given name during [steps.generateResources](../variables/steps.generateResources.md).
 Document group doesn't contain any documents, it serves as a placeholder for provision dependencies.
@@ -246,7 +292,7 @@ Document group doesn't contain any documents, it serves as a placeholder for pro
 apply(options?): Component;
 ```
 
-Defined in: apply.d.ts:12
+Defined in: apply.d.ts:10
 
 Applies the generated manifests to the Kubernetes cluster at the steps.apply step.
 
@@ -268,81 +314,13 @@ Applies the generated manifests to the Kubernetes cluster at the steps.apply ste
 build(): void;
 ```
 
-Defined in: builder.d.ts:22
+Defined in: builder.d.ts:25
 
 Runs all the components that were added to the builder.
 
 #### Returns
 
 `void`
-
-***
-
-### collectCRDs()
-
-```ts
-collectCRDs(options?): Component;
-```
-
-Defined in: collectCRDs.d.ts:11
-
-Adds a [Component](Component.md) that collects Custom Resource Definitions (CRDs) from all
-the document groups and moves them into a new document group after the [steps.modify](../variables/steps.modify.md) step.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`Options`](collectCRDs.Options.md) | Options for collecting CRDs. |
-
-#### Returns
-
-[`Component`](Component.md)
-
-***
-
-### collectNamespaces()
-
-```ts
-collectNamespaces(options?): Component;
-```
-
-Defined in: collectNamespaces.d.ts:11
-
-Adds a [Component](Component.md) that collects namespace definitions from all
-the document groups and moves them into a new document group after the [steps.modify](../variables/steps.modify.md) step.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`Options`](collectNamespaces.Options.md) | Options for collecting namespaces. |
-
-#### Returns
-
-[`Component`](Component.md)
-
-***
-
-### createReferencedNamespaces()
-
-```ts
-createReferencedNamespaces(options?): Component;
-```
-
-Defined in: createReferencedNamespaces.d.ts:9
-
-Create namespace manifests for all the namespaces that are referenced by other resources.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`Options`](createReferencedNamespaces.Options.md) | The options for creating referenced namespaces. |
-
-#### Returns
-
-[`Component`](Component.md)
 
 ***
 
@@ -376,7 +354,7 @@ It is executed before the [steps.output](../variables/steps.output.md) step.
 onGenerateResources(callback): Component;
 ```
 
-Defined in: builder.d.ts:88
+Defined in: builder.d.ts:105
 
 Creates a new component with the given action that will be run during [steps.generateResources](../variables/steps.generateResources.md)
 and adds it to the list of components.
@@ -399,7 +377,7 @@ and adds it to the list of components.
 onGenerateResourcesBasedOnOtherResources(callback): Component;
 ```
 
-Defined in: builder.d.ts:94
+Defined in: builder.d.ts:111
 
 Creates a new component with the given action that will be run during [steps.generateResourcesBasedOnOtherResources](../variables/steps.generateResourcesBasedOnOtherResources.md)
 and adds it to the list of components.
@@ -422,7 +400,7 @@ and adds it to the list of components.
 onModify(callback): Component;
 ```
 
-Defined in: builder.d.ts:100
+Defined in: builder.d.ts:117
 
 Creates a new component with the given action that will be run during [steps.modify](../variables/steps.modify.md)
 and adds it to the list of components.
@@ -445,7 +423,7 @@ and adds it to the list of components.
 onPopulateKubernetesResources(callback): Component;
 ```
 
-Defined in: builder.d.ts:76
+Defined in: builder.d.ts:93
 
 Creates a new component with the given action that will be run during [steps.populateKubernetesResources](../variables/steps.populateKubernetesResources.md)
 and adds it to the list of components.
@@ -468,7 +446,7 @@ and adds it to the list of components.
 onSanitize(callback): Component;
 ```
 
-Defined in: builder.d.ts:82
+Defined in: builder.d.ts:99
 
 Creates a new component with the given action that will be run during [steps.sanitize](../variables/steps.sanitize.md)
 and adds it to the list of components.
@@ -491,7 +469,7 @@ and adds it to the list of components.
 onSpecifyProvisionerDependencies(callback): Component;
 ```
 
-Defined in: builder.d.ts:106
+Defined in: builder.d.ts:123
 
 Creates a new component with the given action that will be run during [steps.specifyProvisionerDependencies](../variables/steps.specifyProvisionerDependencies.md)
 and adds it to the list of components.
@@ -514,7 +492,7 @@ and adds it to the list of components.
 onStep(step, callback): Component;
 ```
 
-Defined in: builder.d.ts:70
+Defined in: builder.d.ts:87
 
 Creates a new component with the given action and adds it to the list of components.
 
@@ -537,7 +515,7 @@ Creates a new component with the given action and adds it to the list of compone
 removeComponent(component): void;
 ```
 
-Defined in: builder.d.ts:28
+Defined in: builder.d.ts:31
 
 Removes given component from the list of components.
 

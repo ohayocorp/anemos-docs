@@ -4,7 +4,7 @@
 function serializeToYaml(data): string;
 ```
 
-Defined in: parsing.d.ts:15
+Defined in: serialization.d.ts:2
 
 Serializes given object to a YAML string.
 

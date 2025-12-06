@@ -4,6 +4,6 @@
 const sanitize: Step;
 ```
 
-Defined in: step.d.ts:23
+Defined in: steps.d.ts:25
 
 Sanitize the options and the component properties in this step.

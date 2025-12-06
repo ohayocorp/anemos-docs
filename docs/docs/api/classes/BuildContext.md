@@ -1,14 +1,14 @@
 # Class: BuildContext
 
-Defined in: buildContext.d.ts:14
+Defined in: buildContext.d.ts:8
 
 ## Properties
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="builderoptions"></a> `builderOptions` | [`BuilderOptions`](BuilderOptions.md) | Common options that are used by the builder components. | buildContext.d.ts:18 |
-| <a id="customdata"></a> `customData` | `Record`\<`string`, `any`\> | Custom data that can be used by the builder components. | buildContext.d.ts:24 |
-| <a id="kubernetesresourceinfo"></a> `kubernetesResourceInfo` | [`KubernetesResourceInfo`](KubernetesResourceInfo.md) | Contains information about the API resources defined in the target cluster. | buildContext.d.ts:21 |
+| <a id="builderoptions"></a> `builderOptions` | [`BuilderOptions`](BuilderOptions.md) | Common options that are used by the builder components. | buildContext.d.ts:12 |
+| <a id="customdata"></a> `customData` | `Record`\<`string`, `any`\> | Custom data that can be used by the builder components. | buildContext.d.ts:18 |
+| <a id="kubernetesresourceınfo"></a> `kubernetesResourceInfo` | [`KubernetesResourceInfo`](KubernetesResourceInfo.md) | Contains information about the API resources defined in the target cluster. | buildContext.d.ts:15 |
 
 ## Methods
 
@@ -20,7 +20,7 @@ Defined in: buildContext.d.ts:14
 addAdditionalFile(additionalFile): void;
 ```
 
-Defined in: buildContext.d.ts:51
+Defined in: buildContext.d.ts:45
 
 Adds given additional file to a [DocumentGroup](DocumentGroup.md) named "".
 
@@ -43,7 +43,7 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 addAdditionalFile(documentGroupPath, additionalFile): void;
 ```
 
-Defined in: buildContext.d.ts:59
+Defined in: buildContext.d.ts:53
 
 Adds the given additional file to a [DocumentGroup](DocumentGroup.md) with the given name during the [steps.generateResources](../variables/steps.generateResources.md) step.
 
@@ -63,6 +63,28 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 
 ***
 
+### addDiagnostic()
+
+```ts
+addDiagnostic(diagnostic): void;
+```
+
+Defined in: buildContext.d.ts:77
+
+Adds a diagnostic to the build context.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `diagnostic` | [`Diagnostic`](Diagnostic.md) |
+
+#### Returns
+
+`void`
+
+***
+
 ### addDocument()
 
 #### Call Signature
@@ -71,7 +93,7 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 addDocument(document): void;
 ```
 
-Defined in: buildContext.d.ts:32
+Defined in: buildContext.d.ts:26
 
 Adds the given document to a [DocumentGroup](DocumentGroup.md) named "".
 
@@ -94,7 +116,7 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 addDocument(options): void;
 ```
 
-Defined in: buildContext.d.ts:40
+Defined in: buildContext.d.ts:34
 
 Adds a new document using the provided options during the [steps.generateResources](../variables/steps.generateResources.md) step.
 
@@ -105,7 +127,7 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 
 | Parameter | Type |
 | ------ | ------ |
-| `options` | [`AddDocumentOptions`](AddDocumentOptions.md) |
+| `options` | [`NewDocumentOptions`](NewDocumentOptions.md) |
 
 ##### Returns
 
@@ -119,7 +141,7 @@ Creates a new [DocumentGroup](DocumentGroup.md) if it doesn't exist.
 addDocumentGroup(documentGroup): void;
 ```
 
-Defined in: buildContext.d.ts:43
+Defined in: buildContext.d.ts:37
 
 Adds given group to the document groups list.
 
@@ -141,7 +163,7 @@ Adds given group to the document groups list.
 getAllDocuments(): Document[];
 ```
 
-Defined in: buildContext.d.ts:71
+Defined in: buildContext.d.ts:65
 
 Returns all documents inside all document groups.
 
@@ -157,7 +179,7 @@ Returns all documents inside all document groups.
 getAllDocumentsSorted(): Document[];
 ```
 
-Defined in: buildContext.d.ts:74
+Defined in: buildContext.d.ts:68
 
 Returns all documents inside all document groups sorted by their file path.
 
@@ -175,7 +197,7 @@ Returns all documents inside all document groups sorted by their file path.
 getDocument(predicate): Document;
 ```
 
-Defined in: buildContext.d.ts:77
+Defined in: buildContext.d.ts:71
 
 Returns the first document that satisfies the given predicate. Returns null if no document is found.
 
@@ -195,7 +217,7 @@ Returns the first document that satisfies the given predicate. Returns null if n
 getDocument(path): Document;
 ```
 
-Defined in: buildContext.d.ts:80
+Defined in: buildContext.d.ts:74
 
 Returns the first document that has the given path. Returns null if no document is found.
 
@@ -217,7 +239,7 @@ Returns the first document that has the given path. Returns null if no document 
 getDocumentGroup(name): DocumentGroup;
 ```
 
-Defined in: buildContext.d.ts:65
+Defined in: buildContext.d.ts:59
 
 Returns the document group that matches the specified name.
 
@@ -239,7 +261,7 @@ Returns the document group that matches the specified name.
 getDocumentGroups(component?): DocumentGroup[];
 ```
 
-Defined in: buildContext.d.ts:68
+Defined in: buildContext.d.ts:62
 
 Returns all document groups. If component is provided, only returns groups added by that component.
 
@@ -255,13 +277,45 @@ Returns all document groups. If component is provided, only returns groups added
 
 ***
 
+### isDevelopment()
+
+```ts
+isDevelopment(): boolean;
+```
+
+Defined in: buildContext.d.ts:80
+
+Returns true if the target environment is development.
+
+#### Returns
+
+`boolean`
+
+***
+
+### isProduction()
+
+```ts
+isProduction(): boolean;
+```
+
+Defined in: buildContext.d.ts:83
+
+Returns true if the target environment is production.
+
+#### Returns
+
+`boolean`
+
+***
+
 ### removeDocumentGroup()
 
 ```ts
 removeDocumentGroup(documentGroup): void;
 ```
 
-Defined in: buildContext.d.ts:62
+Defined in: buildContext.d.ts:56
 
 Removes given group from the document groups list.
 

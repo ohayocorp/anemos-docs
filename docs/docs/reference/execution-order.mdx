@@ -5,7 +5,6 @@ import Mermaid from '@theme/Mermaid';
 
 import Diagram from '!!raw-loader!/docs/steps-mermaid.txt';
 import ExecutionOrderJs from '!!raw-loader!{{CODE_PATH}}/js/execution-order/index.js';
-import ExecutionOrderTs from '!!raw-loader!{{CODE_PATH}}/ts/execution-order/index.ts';
 
 # Execution Order
 
@@ -51,12 +50,6 @@ The `Builder` orchestrates the execution of actions. When you call the `build()`
 Consider the following example components:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="index.ts" showLineNumbers>
-        {ExecutionOrderTs}
-    </CodeBlock>
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="index.js" showLineNumbers>
         {ExecutionOrderJs}

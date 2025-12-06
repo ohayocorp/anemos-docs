@@ -7,20 +7,16 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
 import OptionsJs from '!!raw-loader!{{CODE_PATH}}/js/tutorial/component-options/options.js';
-import OptionsTs from '!!raw-loader!{{CODE_PATH}}/ts/tutorial/component-options/options.ts';
 import ComponentConstructorJs from '!!raw-loader!{{CODE_PATH}}/js/tutorial/component-options/componentConstructor.js';
-import ComponentConstructorTs from '!!raw-loader!{{CODE_PATH}}/ts/tutorial/component-options/componentConstructor.ts';
 import ComponentJs from '!!raw-loader!{{CODE_PATH}}/js/tutorial/component-options/component.js';
-import ComponentTs from '!!raw-loader!{{CODE_PATH}}/ts/tutorial/component-options/component.ts';
 import IndexJs from '!!raw-loader!{{CODE_PATH}}/js/tutorial/component-options/index.js';
-import IndexTs from '!!raw-loader!{{CODE_PATH}}/ts/tutorial/component-options/index.ts';
 
 # Component Options
 
 In the previous section, we moved all the generation code under the `generateResources` function of our new component.
 This code includes the constants that are used to generate the resources, such as `name`, `namespace`, and `image`.
 
-```typescript
+```javascript
 const name = "example-app";
 const namespace = "default";
 const image = "nginx";
@@ -32,12 +28,6 @@ or a different number of replicas. To allow this, we need to add options to our 
 file and define our `Options` class:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="options.ts" showLineNumbers>
-        {OptionsTs}
-    </CodeBlock>
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="options.js" showLineNumbers>
         {OptionsJs}
@@ -45,19 +35,13 @@ file and define our `Options` class:
   </TabItem>
 </Tabs>
 
-Note that, in TypeScript declaration, all the options are optional (they have `?` suffixes). This means that
+Note that, in type declarations, all the options are optional (they have `?` suffixes). This means that
 the user does not have to provide values for these options, therefore we should provide default values for them in our component.
 
 Now, we need to take the options from the user in the constructor of the component. To do this, we will modify the
 component class to accept an instance of `Options` as a parameter.
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="component.ts" showLineNumbers>
-        {ComponentConstructorTs}
-    </CodeBlock>
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="component.js" showLineNumbers>
         {ComponentConstructorJs}
@@ -77,12 +61,6 @@ Let's update the component class to add an action to be run during the `sanitize
 the options in the `generateResources` step instead of the constants we defined earlier.
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="component.ts" showLineNumbers>
-        {ComponentTs}
-    </CodeBlock>
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="component.js" showLineNumbers>
         {ComponentJs}
@@ -98,12 +76,6 @@ example, to set the image to `nginx:1.27` and the replicas to `3`, while keeping
 and `namespace`, we would modify our main script as follows:
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    <CodeBlock language="typescript" title="index.ts" showLineNumbers>
-        {IndexTs}
-    </CodeBlock>
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     <CodeBlock language="javascript" title="index.js" showLineNumbers>
         {IndexJs}
@@ -115,12 +87,6 @@ Now, when you build the application, replicas will be set to `3`, the image will
 and the name and namespace will remain as `example-app` and `default`, respectively.
 
 <Tabs groupId='language'>
-  <TabItem value="typescript" label="TypeScript">
-    ```bash
-    anemos build --tsc . dist/index.js
-    ```
-  </TabItem>
-
   <TabItem value="javascript" label="JavaScript">
     ```bash
     anemos build index.js
